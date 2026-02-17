@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investment Journey | Mutual Fund Advisor</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background: linear-gradient(135deg, #fffaf2, #fff3dd, #ffffff);
+      color:#111;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+      opacity:0.35;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    /* NAVBAR */
+    header{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      padding:14px 18px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .nav{
+      max-width:1200px;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    /* BRAND */
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+
+    .brand h2{
+      font-size:24px;
+      font-weight:900;
+      color:#111;
+      letter-spacing:0.5px;
+      line-height:1.1;
+    }
+
+    .brand span{
+      font-size:13px;
+      color:#8b5a2b;
+      font-weight:900;
+    }
+
+    /* NAV LINKS (DESKTOP RIGHT SIDE) */
+    nav{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:#111;
+      font-size:14px;
+      font-weight:900;
+      opacity:0.75;
+      transition:0.3s;
+    }
+
+    nav a:hover{
+      opacity:1;
+      color:#b57a3c;
+    }
+
+    /* BOOK BUTTON */
+    .btn-book{
+      background: linear-gradient(90deg, #0d1b3d, #1f2e57);
+      color:white;
+      border:none;
+      padding:12px 22px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow: 0px 18px 35px rgba(0,0,0,0.18);
+      transition:0.3s;
+    }
+
+    .btn-book:hover{
+      transform: translateY(-2px);
+      box-shadow: 0px 25px 45px rgba(0,0,0,0.22);
+    }
+
+    /* HERO */
+    .hero{
+      max-width:1200px;
+      margin:auto;
+      padding:70px 18px 40px;
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap:40px;
+      align-items:center;
+    }
+
+    .hero h1{
+      font-size:58px;
+      font-weight:900;
+      line-height:1.05;
+      margin-bottom:15px;
+      color:#111;
+    }
+
+    .hero h1 span{
+      background: linear-gradient(90deg, #d6a15e, #9a5b28, #111);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p{
+      font-size:16px;
+      color:#333;
+      line-height:1.7;
+      max-width:620px;
+      font-weight:800;
+      opacity:0.9;
+    }
+
+    .btns{
+      margin-top:25px;
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+
+    .btn-primary{
+      background: linear-gradient(90deg, #c99352, #e0b57d);
+      border:none;
+      padding:14px 24px;
+      border-radius:999px;
+      color:#111;
+      font-weight:900;
+      font-size:15px;
+      cursor:pointer;
+      box-shadow: 0px 12px 26px rgba(180,120,60,0.22);
+      transition:0.3s;
+    }
+
+    .btn-primary:hover{
+      transform: translateY(-2px);
+      box-shadow: 0px 16px 32px rgba(180,120,60,0.28);
+    }
+
+    .btn-secondary{
+      background:#fff;
+      border:1px solid rgba(0,0,0,0.18);
+      padding:14px 24px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:15px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .btn-secondary:hover{
+      border-color:#b57a3c;
+      color:#b57a3c;
+      transform: translateY(-2px);
+    }
+
+    .address{
+      margin-top:18px;
+      font-size:14px;
+      font-weight:900;
+      color:#111;
+    }
+
+    .address span{
+      color:#9a5b28;
+    }
+
+    /* HERO CARD */
+    .hero-card{
+      background: rgba(255,255,255,0.78);
+      border:1px solid rgba(0,0,0,0.08);
+      border-radius:22px;
+      padding:22px;
+      box-shadow: 0px 18px 40px rgba(0,0,0,0.08);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      top:-40px;
+      right:-40px;
+      width:160px;
+      height:160px;
+      background: radial-gradient(circle, rgba(214,161,94,0.4), transparent 70%);
+      border-radius:50%;
+    }
+
+    .hero-card h3{
+      font-size:22px;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .hero-card p{
+      font-size:14px;
+      font-weight:800;
+      color:#444;
+      line-height:1.6;
+      margin-bottom:18px;
+    }
+
+    /* REMOVE RIGHT TICK - SIMPLE LIST */
+    .hero-card ul{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .hero-card ul li{
+      background: rgba(0,0,0,0.05);
+      padding:12px 14px;
+      border-radius:14px;
+      font-size:13px;
+      font-weight:900;
+      color:#222;
+    }
+
+    /* SECTION */
+    .section{
+      max-width:1200px;
+      margin:auto;
+      padding:60px 18px;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:35px;
+    }
+
+    .section-title h2{
+      font-size:48px;
+      font-weight:900;
+      color:#111;
+    }
+
+    .section-title p{
+      margin-top:10px;
+      font-size:15px;
+      font-weight:900;
+      color:#555;
+    }
+
+    /* SERVICES */
+    .services-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:22px;
+    }
+
+    .service-card{
+      background: rgba(255,255,255,0.95);
+      border:1px solid rgba(0,0,0,0.10);
+      border-radius:28px;
+      padding:30px;
+      min-height:190px;
+      box-shadow: 0px 16px 40px rgba(0,0,0,0.06);
+      transition:0.35s ease;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .service-card::before{
+      content:"";
+      position:absolute;
+      top:-80px;
+      right:-80px;
+      width:200px;
+      height:200px;
+      background: radial-gradient(circle, rgba(224,181,125,0.40), transparent 70%);
+      border-radius:50%;
+    }
+
+    .service-card:hover{
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0px 28px 60px rgba(0,0,0,0.12);
+      border-color: rgba(181,122,60,0.25);
+    }
+
+    .service-card h3{
+      font-size:24px;
+      font-weight:900;
+      margin-bottom:14px;
+      color:#111;
+      position:relative;
+      z-index:2;
+    }
+
+    .service-card p{
+      font-size:14px;
+      font-weight:900;
+      color:#444;
+      line-height:1.8;
+      position:relative;
+      z-index:2;
+    }
+
+    /* FUNDS */
+    .fund-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:22px;
+    }
+
+    .fund-card{
+      background: rgba(255,255,255,0.95);
+      border:1px solid rgba(0,0,0,0.10);
+      border-radius:28px;
+      padding:30px;
+      box-shadow: 0px 16px 40px rgba(0,0,0,0.06);
+      transition:0.35s ease;
+    }
+
+    .fund-card:hover{
+      transform: translateY(-8px);
+      box-shadow: 0px 28px 60px rgba(0,0,0,0.12);
+      border-color: rgba(181,122,60,0.25);
+    }
+
+    .fund-card h3{
+      font-size:24px;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .fund-card p{
+      font-size:14px;
+      font-weight:900;
+      color:#444;
+      line-height:1.8;
+    }
+
+    .fund-action-row{
+      margin-top:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .badge{
+      padding:10px 16px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      color:#111;
+      background: linear-gradient(90deg, #e0b57d, #fff0d5);
+      border:1px solid rgba(0,0,0,0.10);
+    }
+
+    .btn-view{
+      background: linear-gradient(90deg, #c99352, #e0b57d);
+      color:#111;
+      padding:9px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      cursor:pointer;
+      border:none;
+      transition:0.3s;
+    }
+
+    .btn-view:hover{
+      transform: translateY(-2px);
+      box-shadow: 0px 10px 20px rgba(180,120,60,0.22);
+    }
+
+    /* CALCULATOR */
+    .calculator{
+      background: rgba(255,255,255,0.92);
+      border-radius:28px;
+      padding:45px 35px;
+      max-width:1000px;
+      margin:50px auto;
+      border:1px solid rgba(0,0,0,0.08);
+      box-shadow: 0px 25px 55px rgba(0,0,0,0.08);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .calculator h2{
+      font-size:34px;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .calculator p{
+      font-size:14px;
+      font-weight:900;
+      color:#555;
+      margin-bottom:25px;
+    }
+
+    .calc-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:18px;
+    }
+
+    .calc-box label{
+      font-size:13px;
+      font-weight:900;
+      margin-bottom:6px;
+      display:block;
+      color:#333;
+    }
+
+    .calc-box input{
+      width:100%;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,0.15);
+      background: rgba(255,255,255,0.95);
+      font-size:14px;
+      font-weight:900;
+      outline:none;
+    }
+
+    .calc-actions{
+      margin-top:20px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .calc-actions button{
+      padding:12px 18px;
+      border-radius:999px;
+      border:none;
+      font-weight:900;
+      cursor:pointer;
+      font-size:14px;
+      transition:0.3s;
+    }
+
+    .calc-btn{
+      background: linear-gradient(90deg, #c99352, #e0b57d);
+      color:#111;
+    }
+
+    .reset-btn{
+      background:#fff;
+      border:1px solid rgba(0,0,0,0.15);
+    }
+
+    .calc-btn:hover, .reset-btn:hover{
+      transform: translateY(-2px);
+    }
+
+    .result{
+      margin-top:25px;
+      padding:18px;
+      border-radius:18px;
+      background: rgba(214,161,94,0.12);
+      border:1px solid rgba(0,0,0,0.08);
+      font-size:14px;
+      font-weight:900;
+      line-height:1.8;
+      min-height:80px;
+    }
+
+    /* CONTACT */
+    .contact-wrap{
+      max-width:1100px;
+      margin:80px auto;
+      position:relative;
+      padding:30px 18px;
+    }
+
+    .handshake-bg{
+      position:absolute;
+      top:0;
+      right:0;
+      width:420px;
+      opacity:0.18;
+      animation: floatShake 3.5s ease-in-out infinite;
+      z-index:0;
+    }
+
+    @keyframes floatShake{
+      0%{ transform: translateY(0px) rotate(0deg); }
+      50%{ transform: translateY(-12px) rotate(1deg); }
+      100%{ transform: translateY(0px) rotate(0deg); }
+    }
+
+    .contact-box{
+      max-width:520px;
+      margin:auto;
+      background: rgba(255,255,255,0.92);
+      border-radius:28px;
+      padding:35px;
+      border:1px solid rgba(0,0,0,0.08);
+      box-shadow: 0px 25px 55px rgba(0,0,0,0.08);
+      text-align:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .contact-box h2{
+      font-size:32px;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .contact-box p{
+      font-size:14px;
+      font-weight:900;
+      color:#444;
+      margin-bottom:18px;
+      line-height:1.6;
+    }
+
+    .contact-box input, .contact-box textarea{
+      width:100%;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,0.15);
+      margin-bottom:12px;
+      font-size:14px;
+      font-weight:900;
+      outline:none;
+    }
+
+    .contact-box button{
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:999px;
+      font-weight:900;
+      font-size:14px;
+      cursor:pointer;
+      background: linear-gradient(90deg, #c99352, #e0b57d);
+      color:#111;
+      transition:0.3s;
+    }
+
+    .contact-box button:hover{
+      transform: translateY(-2px);
+    }
+
+    footer{
+      text-align:center;
+      padding:20px;
+      font-size:13px;
+      font-weight:900;
+      background: rgba(255,255,255,0.75);
+      border-top: 1px solid rgba(0,0,0,0.08);
+      color:#111;
+    }
+
+    /* MODAL */
+    .modal-overlay{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(10px);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+      z-index:99999;
+    }
+
+    .modal-box{
+      max-width:650px;
+      width:100%;
+      background: rgba(255,255,255,0.97);
+      border-radius:28px;
+      padding:32px;
+      border: 1px solid rgba(0,0,0,0.10);
+      box-shadow: 0px 25px 60px rgba(0,0,0,0.22);
+      position:relative;
+      animation: popup 0.3s ease;
+    }
+
+    @keyframes popup{
+      from{
+        transform: translateY(20px) scale(0.96);
+        opacity:0;
+      }
+      to{
+        transform: translateY(0px) scale(1);
+        opacity:1;
+      }
+    }
+
+    .modal-box h2{
+      font-size:28px;
+      font-weight:900;
+      margin-bottom:10px;
+      color:#111;
+    }
+
+    .modal-box p{
+      font-size:14px;
+      font-weight:900;
+      color:#333;
+      line-height:1.7;
+      margin-bottom:14px;
+    }
+
+    .modal-list{
+      margin-top:15px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .modal-item{
+      background: rgba(214,161,94,0.14);
+      padding:12px 14px;
+      border-radius:14px;
+      font-size:13px;
+      font-weight:900;
+      color:#111;
+      border:1px solid rgba(0,0,0,0.08);
+    }
+
+    .modal-close{
+      position:absolute;
+      top:14px;
+      right:16px;
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      border:none;
+      background: rgba(0,0,0,0.06);
+      font-size:18px;
+      font-weight:900;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .modal-close:hover{
+      background: rgba(214,161,94,0.25);
+    }
+
+    /* MOBILE RESPONSIVE */
+   @media(max-width:900px){
+
+  .nav{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:14px;
+  }
+
+  .brand{
+    align-items:center;
+    text-align:center;
+  }
+
+  nav{
+    width:100%;
+    margin-top:10px;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  .hero{
+    grid-template-columns: 1fr;
+    text-align:center;
+  }
+
+  .services-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .fund-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .calc-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .btn-book{
+    width:90%;
+    max-width:340px;
+    text-align:center;
+    margin:auto;
+  }
+
+  .handshake-bg{
+    width:250px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <header>
+    <div class="nav">
+
+      <div class="brand">
+        <h2>Investment Journey</h2>
+        <span>AMFI Registered Mutual Fund Distributor</span>
+      </div>
+
+      <!-- LINKS RIGHT SIDE DESKTOP -->
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#funds">Funds</a>
+        <a href="#calculator">Calculator</a>
+        <a href="#contact">Contact</a>
+
+        <!-- BOOK APPOINTMENT BUTTON -->
+        <button class="btn-book" onclick="makeCall()">Book an Appointment</button>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div>
+      <h1>Start Your <span>Investment Journey</span> With Us</h1>
+
+      <p>
+        Build wealth with smart investing. We provide expert mutual fund guidance, SIP planning,
+        lumpsum strategy and portfolio management for long-term growth.
+      </p>
+
+      <div class="btns">
+        <button class="btn-primary" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">
+          Calculate Returns
+        </button>
+
+        <button class="btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          Contact Now
+        </button>
+      </div>
+
+      <div class="address">
+        Office Address: <span>Udyambag, Belgaum, Karnataka - 590001</span>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <h3>Why Choose Us?</h3>
+      <p>We focus on safe, goal-based and long-term investment strategies.</p>
+      <ul>
+        <li>SIP & Lumpsum Planning</li>
+        <li>Fund Selection & Risk Analysis</li>
+        <li>Portfolio Review & Rebalancing</li>
+        <li>Tax Saving (ELSS) Guidance</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="section-title">
+      <h2>Our Services</h2>
+      <p>Professional investment solutions designed for long-term wealth creation.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card" onclick="openModal('Financial Plan')">
+        <h3>Financial Plan</h3>
+        <p>Complete roadmap to manage savings, investments and future goals.</p>
+      </div>
+
+      <div class="service-card" onclick="openModal('Investment Advice')">
+        <h3>Investment Advice</h3>
+        <p>Personalized mutual fund guidance based on your goals and risk profile.</p>
+      </div>
+
+      <div class="service-card" onclick="openModal('Investment Awareness Programs')">
+        <h3>Investment Awareness Programs</h3>
+        <p>Learn compounding, SIP benefits, market knowledge and smart investing.</p>
+      </div>
+
+      <div class="service-card" onclick="openModal('Insurance Planning')">
+        <h3>Insurance Planning</h3>
+        <p>Protect your family with correct insurance planning aligned to your goals.</p>
+      </div>
+
+      <div class="service-card" onclick="openModal('Tax Planning')">
+        <h3>Tax Planning</h3>
+        <p>Save taxes legally using ELSS and structured investment strategies.</p>
+      </div>
+
+      <div class="service-card" onclick="openModal('Retirement Planning')">
+        <h3>Retirement Planning</h3>
+        <p>Build retirement corpus using SIP and long-term wealth strategies.</p>
+      </div>
+
+      <div class="service-card" onclick="openModal('Children Education Plan')">
+        <h3>Children Education Plan</h3>
+        <p>Secure your child’s education with disciplined long-term investments.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUNDS -->
+  <section class="section" id="funds">
+    <div class="section-title">
+      <h2>Fund Categories</h2>
+      <p>Different mutual fund categories suitable for every investor.</p>
+    </div>
+
+    <div class="fund-grid">
+      <div class="fund-card">
+        <h3>Large Cap Funds</h3>
+        <p>Stable investment with consistent long-term growth and low volatility.</p>
+        <div class="fund-action-row">
+          <span class="badge">Low Risk</span>
+          <button class="btn-view" onclick="openModal('Large Cap Funds')">View More →</button>
+        </div>
+      </div>
+
+      <div class="fund-card">
+        <h3>Mid Cap Funds</h3>
+        <p>Moderate risk and high growth potential for long-term wealth creation.</p>
+        <div class="fund-action-row">
+          <span class="badge">Medium Risk</span>
+          <button class="btn-view" onclick="openModal('Mid Cap Funds')">View More →</button>
+        </div>
+      </div>
+
+      <div class="fund-card">
+        <h3>Small Cap Funds</h3>
+        <p>High return potential funds for investors with strong risk capacity.</p>
+        <div class="fund-action-row">
+          <span class="badge">High Risk</span>
+          <button class="btn-view" onclick="openModal('Small Cap Funds')">View More →</button>
+        </div>
+      </div>
+
+      <div class="fund-card">
+        <h3>Hybrid Funds</h3>
+        <p>Balanced funds with mix of equity & debt for stability and growth.</p>
+        <div class="fund-action-row">
+          <span class="badge">Balanced</span>
+          <button class="btn-view" onclick="openModal('Hybrid Funds')">View More →</button>
+        </div>
+      </div>
+
+      <div class="fund-card">
+        <h3>Debt Funds</h3>
+        <p>Safe option focusing on bonds and fixed income instruments.</p>
+        <div class="fund-action-row">
+          <span class="badge">Safe</span>
+          <button class="btn-view" onclick="openModal('Debt Funds')">View More →</button>
+        </div>
+      </div>
+
+      <div class="fund-card">
+        <h3>ELSS Tax Saving Funds</h3>
+        <p>Save tax under 80C while enjoying equity market returns.</p>
+        <div class="fund-action-row">
+          <span class="badge">Tax Saving</span>
+          <button class="btn-view" onclick="openModal('ELSS Tax Saving Funds')">View More →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="calculator" id="calculator">
+    <h2>Investment Calculator</h2>
+    <p>Enter values to calculate your estimated investment growth.</p>
+
+    <div class="calc-grid">
+      <div class="calc-box">
+        <label>Monthly Investment (₹)</label>
+        <input type="number" id="monthly" placeholder="Enter monthly SIP amount" />
+      </div>
+
+      <div class="calc-box">
+        <label>Expected Return (%)</label>
+        <input type="number" id="rate" placeholder="Enter annual return rate" />
+      </div>
+
+      <div class="calc-box">
+        <label>Time Period (Years)</label>
+        <input type="number" id="years" placeholder="Enter investment duration" />
+      </div>
+
+      <div class="calc-box">
+        <label>Investment Type</label>
+        <input type="text" id="type" placeholder="SIP / Lumpsum" />
+      </div>
+    </div>
+
+    <div class="calc-actions">
+      <button class="calc-btn" onclick="calculateInvestment()">Calculate</button>
+      <button class="reset-btn" onclick="resetCalculator()">Reset</button>
+    </div>
+
+    <div class="result" id="resultBox">
+      Your results will appear here...
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-wrap">
+
+      <img class="handshake-bg"
+        src="https://cdn-icons-png.flaticon.com/512/929/929426.png"
+        alt="Handshake" />
+
+      <div class="contact-box">
+        <h2>Contact Us</h2>
+        <p>We will guide you in selecting the right mutual funds for your financial goals.</p>
+
+        <input type="text" placeholder="Your Name" />
+        <input type="email" placeholder="Your Email" />
+        <textarea rows="4" placeholder="Write your message..."></textarea>
+
+        <button>Send Message</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Investment Journey | AMFI Registered Mutual Fund Distributor
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="infoModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+
+      <h2 id="modalTitle">Title</h2>
+      <p id="modalDesc">Description</p>
+
+      <div class="modal-list" id="modalDetails"></div>
+    </div>
+  </div>
+
+  <script>
+    /* BOOK APPOINTMENT DIRECT CALL */
+    function makeCall(){
+      window.location.href = "tel:+917204914191";
+    }
+
+    /* CALCULATOR */
+    function calculateInvestment() {
+      let monthly = document.getElementById("monthly").value;
+      let rate = document.getElementById("rate").value;
+      let years = document.getElementById("years").value;
+
+      if(monthly === "" || rate === "" || years === ""){
+        document.getElementById("resultBox").innerHTML =
+          "⚠ Please fill all required values to calculate returns.";
+        return;
+      }
+
+      monthly = parseFloat(monthly);
+      rate = parseFloat(rate) / 100;
+      years = parseFloat(years);
+
+      let months = years * 12;
+      let monthlyRate = rate / 12;
+
+      let futureValue = monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+      let invested = monthly * months;
+      let gain = futureValue - invested;
+
+      document.getElementById("resultBox").innerHTML =
+        `<b>Total Invested:</b> ₹${invested.toFixed(0)} <br>
+         <b>Estimated Returns:</b> ₹${gain.toFixed(0)} <br>
+         <b>Total Value:</b> ₹${futureValue.toFixed(0)} <br><br>
+         <span style="color:#9a5b28;font-weight:900;">📈 Smart investing builds wealth over time.</span>`;
+    }
+
+    function resetCalculator(){
+      document.getElementById("monthly").value = "";
+      document.getElementById("rate").value = "";
+      document.getElementById("years").value = "";
+      document.getElementById("type").value = "";
+      document.getElementById("resultBox").innerHTML = "Your results will appear here...";
+    }
+
+    /* MODAL DATA */
+    const modalData = {
+      "Large Cap Funds": {
+        desc: "Large Cap Funds invest in India's top companies. These funds are stable and give consistent long-term growth.",
+        details: [
+          "Best For: Beginners & conservative investors",
+          "Risk Level: Low to Medium",
+          "Ideal Horizon: 5+ Years",
+          "Why Invest: Stable companies with strong fundamentals",
+          "Suitable Goals: Retirement & long-term stability"
+        ]
+      },
+      "Mid Cap Funds": {
+        desc: "Mid Cap Funds invest in growing companies. These funds provide higher growth but with moderate volatility.",
+        details: [
+          "Best For: Investors seeking growth",
+          "Risk Level: Medium",
+          "Ideal Horizon: 5 to 7+ Years",
+          "Why Invest: Higher return potential than large caps",
+          "Suitable Goals: Wealth creation"
+        ]
+      },
+      "Small Cap Funds": {
+        desc: "Small Cap Funds invest in smaller companies with high return potential. Risk is high but returns can be strong.",
+        details: [
+          "Best For: Aggressive investors",
+          "Risk Level: High",
+          "Ideal Horizon: 7 to 10+ Years",
+          "Why Invest: High growth in long term",
+          "Suitable Goals: Maximum wealth creation"
+        ]
+      },
+      "Hybrid Funds": {
+        desc: "Hybrid Funds invest in both equity and debt. They balance stability and growth.",
+        details: [
+          "Best For: Balanced investors",
+          "Risk Level: Medium",
+          "Ideal Horizon: 3 to 5+ Years",
+          "Why Invest: Stability + growth combination",
+          "Suitable Goals: Balanced long-term investing"
+        ]
+      },
+      "Debt Funds": {
+        desc: "Debt Funds invest in fixed income instruments like bonds. They provide stable returns.",
+        details: [
+          "Best For: Safe investors",
+          "Risk Level: Low",
+          "Ideal Horizon: 1 to 3+ Years",
+          "Why Invest: Low volatility stable returns",
+          "Suitable Goals: Short term savings"
+        ]
+      },
+      "ELSS Tax Saving Funds": {
+        desc: "ELSS Funds save tax under Section 80C and provide equity returns with 3-year lock-in period.",
+        details: [
+          "Best For: Tax saving investors",
+          "Risk Level: Medium to High",
+          "Lock-in Period: 3 Years",
+          "Why Invest: Tax saving + wealth creation",
+          "Suitable Goals: Tax planning"
+        ]
+      },
+      "Financial Plan": {
+        desc: "A financial plan helps you create a complete roadmap for savings and investment goals.",
+        details: [
+          "Track expenses & savings",
+          "Plan for home / retirement",
+          "Emergency fund planning",
+          "Goal-based investing strategy"
+        ]
+      },
+      "Investment Advice": {
+        desc: "Investment advice helps you select mutual funds based on risk and long-term goals.",
+        details: [
+          "Correct fund selection",
+          "Diversification planning",
+          "Long-term return optimization",
+          "Risk management"
+        ]
+      },
+      "Investment Awareness Programs": {
+        desc: "We educate investors about SIP, compounding and financial planning basics.",
+        details: [
+          "SIP knowledge",
+          "Compounding benefits",
+          "Risk & return awareness",
+          "Smart money habits"
+        ]
+      },
+      "Insurance Planning": {
+        desc: "Insurance planning protects your family and future income in emergencies.",
+        details: [
+          "Life insurance guidance",
+          "Health insurance planning",
+          "Family financial security"
+        ]
+      },
+      "Tax Planning": {
+        desc: "Tax planning helps you save tax legally while building wealth.",
+        details: [
+          "80C planning",
+          "ELSS guidance",
+          "Smart tax saving investment strategy"
+        ]
+      },
+      "Retirement Planning": {
+        desc: "Retirement planning helps you build a secure retirement corpus.",
+        details: [
+          "Long-term SIP planning",
+          "Stable retirement portfolio",
+          "Inflation protection"
+        ]
+      },
+      "Children Education Plan": {
+        desc: "A child education plan helps you invest for your child's future education expenses.",
+        details: [
+          "College planning",
+          "Future inflation coverage",
+          "Long-term wealth building"
+        ]
+      }
+    };
+
+    function openModal(name){
+      const modal = document.getElementById("infoModal");
+      document.getElementById("modalTitle").innerText = name;
+      document.getElementById("modalDesc").innerText = modalData[name].desc;
+
+      const detailsBox = document.getElementById("modalDetails");
+      detailsBox.innerHTML = "";
+
+      modalData[name].details.forEach(item=>{
+        detailsBox.innerHTML += `<div class="modal-item">${item}</div>`;
+      });
+
+      modal.style.display = "flex";
+    }
+
+    function closeModal(){
+      document.getElementById("infoModal").style.display = "none";
+    }
+
+    window.addEventListener("click", function(e){
+      const modal = document.getElementById("infoModal");
+      if(e.target === modal){
+        closeModal();
+      }
+    });
+  </script>
+
+</body>
+</html>
