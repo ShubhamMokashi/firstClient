@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Investment Journey | Mutual Fund Advisor</title>
+  <title>Krushikesh B. Patil | Mutual Fund Advisor</title>
 
   <style>
     *{
@@ -59,6 +59,7 @@
       gap:4px;
     }
 
+    /* REPLACED Investment Journey with Krushikesh B. Patil */
     .brand h2{
       font-size:24px;
       font-weight:900;
@@ -73,7 +74,6 @@
       font-weight:900;
     }
 
-    /* NAV LINKS (DESKTOP RIGHT SIDE) */
     nav{
       display:flex;
       gap:18px;
@@ -95,7 +95,6 @@
       color:#b57a3c;
     }
 
-    /* BOOK BUTTON */
     .btn-book{
       background: linear-gradient(90deg, #0d1b3d, #1f2e57);
       color:white;
@@ -237,7 +236,6 @@
       margin-bottom:18px;
     }
 
-    /* REMOVE RIGHT TICK - SIMPLE LIST */
     .hero-card ul{
       list-style:none;
       display:flex;
@@ -335,6 +333,35 @@
     }
 
     /* FUNDS */
+    #funds{
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* growth.png top right (best) */
+    .growth-bg{
+      position:absolute;
+      top:25px;
+      right:30px;
+      width:330px;
+      opacity:0.18;
+      z-index:0;
+      animation: floatGrowth 4s ease-in-out infinite;
+      filter: brightness(0.75) contrast(1.2);
+    }
+
+    @keyframes floatGrowth{
+      0%{ transform: translateY(0px) translateX(0px); }
+      50%{ transform: translateY(-18px) translateX(-8px); }
+      100%{ transform: translateY(0px) translateX(0px); }
+    }
+
+    #funds .section-title,
+    #funds .fund-grid{
+      position:relative;
+      z-index:2;
+    }
+
     .fund-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -405,6 +432,87 @@
       box-shadow: 0px 10px 20px rgba(180,120,60,0.22);
     }
 
+    /* OUR CLIENTS */
+    .amc-section{
+      max-width:1200px;
+      margin:auto;
+      padding:55px 18px 20px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .amc-title{
+      text-align:center;
+      margin-bottom:25px;
+    }
+
+    .amc-title h2{
+      font-size:44px;
+      font-weight:900;
+      color:#111;
+    }
+
+    .amc-title p{
+      font-size:14px;
+      font-weight:900;
+      color:#555;
+      margin-top:10px;
+    }
+
+    .amc-slider{
+      display:flex;
+      gap:22px;
+      overflow:hidden;
+      padding:10px 0;
+      position:relative;
+    }
+
+    .amc-track{
+      display:flex;
+      gap:22px;
+      animation: scrollAmc 18s linear infinite;
+    }
+
+    .amc-slider:hover .amc-track{
+      animation-play-state: paused;
+    }
+
+    @keyframes scrollAmc{
+      0%{ transform: translateX(0); }
+      100%{ transform: translateX(-50%); }
+    }
+
+    .amc-card{
+      min-width:180px;
+      height:110px;
+      border-radius:20px;
+      background: rgba(255,255,255,0.95);
+      border:1px solid rgba(0,0,0,0.10);
+      box-shadow: 0px 16px 40px rgba(0,0,0,0.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:0.35s ease;
+      cursor:pointer;
+    }
+
+    .amc-card:hover{
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0px 28px 60px rgba(0,0,0,0.12);
+      border-color: rgba(181,122,60,0.30);
+    }
+
+    .amc-card img{
+      width:110px;
+      height:auto;
+      object-fit:contain;
+      transition:0.3s;
+    }
+
+    .amc-card:hover img{
+      transform: scale(1.05);
+    }
+
     /* CALCULATOR */
     .calculator{
       background: rgba(255,255,255,0.92);
@@ -445,7 +553,14 @@
       color:#333;
     }
 
-    .calc-box input{
+    /* RESTRICT DROPDOWN INSIDE */
+    .calc-box{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .calc-box input,
+    .calc-box select{
       width:100%;
       padding:12px 14px;
       border-radius:14px;
@@ -454,6 +569,13 @@
       font-size:14px;
       font-weight:900;
       outline:none;
+      cursor:pointer;
+    }
+
+    select{
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
     }
 
     .calc-actions{
@@ -499,94 +621,99 @@
       min-height:80px;
     }
 
-    /* CONTACT */
-    .contact-wrap{
-      max-width:1100px;
-      margin:80px auto;
-      position:relative;
-      padding:30px 18px;
-    }
-
-    .handshake-bg{
-      position:absolute;
-      top:0;
-      right:0;
-      width:420px;
-      opacity:0.18;
-      animation: floatShake 3.5s ease-in-out infinite;
-      z-index:0;
-    }
-
-    @keyframes floatShake{
-      0%{ transform: translateY(0px) rotate(0deg); }
-      50%{ transform: translateY(-12px) rotate(1deg); }
-      100%{ transform: translateY(0px) rotate(0deg); }
-    }
+    /* CONTACT (REDESIGN MATCHING WEBSITE) */
 
     .contact-box{
-      max-width:520px;
-      margin:auto;
-      background: rgba(255,255,255,0.92);
-      border-radius:28px;
-      padding:35px;
-      border:1px solid rgba(0,0,0,0.08);
-      box-shadow: 0px 25px 55px rgba(0,0,0,0.08);
-      text-align:center;
-      position:relative;
-      z-index:2;
-    }
+  max-width:750px;
+  margin:auto;
+  background: rgba(255,255,255,0.90);
+  border-radius:26px;
+  padding:28px 28px;
+  border:1px solid rgba(0,0,0,0.08);
+  box-shadow: 0px 18px 45px rgba(0,0,0,0.08);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+  position:relative;
+  overflow:hidden;
+}
 
-    .contact-box h2{
-      font-size:32px;
-      font-weight:900;
-      margin-bottom:10px;
-    }
+/* GOLD TEXTURE GLOW */
+.gold-texture{
+  position:absolute;
+  top:-60px;
+  right:-90px;
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  background: radial-gradient(circle,
+    rgba(224,181,125,0.55),
+    rgba(201,147,82,0.25),
+    transparent 70%);
+  opacity:0.9;
+  z-index:0;
+  animation: goldFloat 5s ease-in-out infinite;
+}
+footer{
+  text-align:center;
+  padding:25px 20px;
+  font-size:13px;
+  font-weight:900;
+  background: rgba(255,255,255,0.75);
+  border-top: 1px solid rgba(0,0,0,0.08);
+  color:#111;
+  width:100%;
+}
 
-    .contact-box p{
-      font-size:14px;
-      font-weight:900;
-      color:#444;
-      margin-bottom:18px;
-      line-height:1.6;
-    }
+@keyframes goldFloat{
+  0%{ transform: translateY(0px) translateX(0px); }
+  50%{ transform: translateY(-18px) translateX(-10px); }
+  100%{ transform: translateY(0px) translateX(0px); }
+}
 
-    .contact-box input, .contact-box textarea{
-      width:100%;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid rgba(0,0,0,0.15);
-      margin-bottom:12px;
-      font-size:14px;
-      font-weight:900;
-      outline:none;
-    }
+/* KEEP CONTENT ABOVE */
+.contact-left,
+.contact-actions{
+  position:relative;
+  z-index:2;
+}
 
-    .contact-box button{
-      width:100%;
-      padding:12px;
-      border:none;
-      border-radius:999px;
-      font-weight:900;
-      font-size:14px;
-      cursor:pointer;
-      background: linear-gradient(90deg, #c99352, #e0b57d);
-      color:#111;
-      transition:0.3s;
-    }
+/* BUTTONS THEME MATCH */
+.contact-btn{
+  padding:12px 20px;
+  border-radius:999px;
+  font-weight:900;
+  border:none;
+  cursor:pointer;
+  font-size:14px;
+  transition:0.3s;
+  min-width:150px;
+  box-shadow: 0px 12px 26px rgba(0,0,0,0.10);
+}
 
-    .contact-box button:hover{
-      transform: translateY(-2px);
-    }
+.call-btn{
+  background: linear-gradient(90deg, #0d1b3d, #1f2e57);
+  color:white;
+}
 
-    footer{
-      text-align:center;
-      padding:20px;
-      font-size:13px;
-      font-weight:900;
-      background: rgba(255,255,255,0.75);
-      border-top: 1px solid rgba(0,0,0,0.08);
-      color:#111;
-    }
+.whatsapp-btn{
+  background: linear-gradient(90deg, #c99352, #e0b57d);
+  color:#111;
+  border:1px solid rgba(0,0,0,0.10);
+}
+
+.contact-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0px 18px 35px rgba(0,0,0,0.12);
+}
+.contact-wrap{
+  max-width:1200px;
+  margin:80px auto 70px;   /* bottom gap increase */
+  padding:0 18px;
+}
+
 
     /* MODAL */
     .modal-overlay{
@@ -679,61 +806,69 @@
     }
 
     /* MOBILE RESPONSIVE */
-   @media(max-width:900px){
+    @media(max-width:900px){
 
-  .nav{
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    gap:14px;
-  }
+      .nav{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        gap:14px;
+      }
 
-  .brand{
-    align-items:center;
-    text-align:center;
-  }
+      .brand{
+        align-items:center;
+        text-align:center;
+      }
 
-  nav{
-    width:100%;
-    margin-top:10px;
-    justify-content:center;
-    gap:16px;
-    flex-wrap:wrap;
-  }
+      nav{
+        width:100%;
+        margin-top:10px;
+        justify-content:center;
+        gap:16px;
+        flex-wrap:wrap;
+      }
 
-  .hero{
-    grid-template-columns: 1fr;
-    text-align:center;
-  }
+      .hero{
+        grid-template-columns: 1fr;
+        text-align:center;
+      }
 
-  .services-grid{
-    grid-template-columns: 1fr;
-  }
+      .services-grid{
+        grid-template-columns: 1fr;
+      }
 
-  .fund-grid{
-    grid-template-columns: 1fr;
-  }
+      .fund-grid{
+        grid-template-columns: 1fr;
+      }
 
-  .calc-grid{
-    grid-template-columns: 1fr;
-  }
+      .calc-grid{
+        grid-template-columns: 1fr;
+      }
 
-  .hero h1{
-    font-size:42px;
-  }
+      .hero h1{
+        font-size:42px;
+      }
 
-  .btn-book{
-    width:90%;
-    max-width:340px;
-    text-align:center;
-    margin:auto;
-  }
+      .btn-book{
+        width:90%;
+        max-width:340px;
+        text-align:center;
+        margin:auto;
+      }
 
-  .handshake-bg{
-    width:250px;
-  }
-}
+      .growth-bg{
+        width:220px;
+      }
 
+      .contact-box{
+        flex-direction:column;
+        text-align:center;
+      }
+
+      .contact-actions{
+        justify-content:center;
+      }
+    }
   </style>
 </head>
 
@@ -744,18 +879,16 @@
     <div class="nav">
 
       <div class="brand">
-        <h2>Investment Journey</h2>
+        <h2>Krushikesh B. Patil</h2>
         <span>AMFI Registered Mutual Fund Distributor</span>
       </div>
 
-      <!-- LINKS RIGHT SIDE DESKTOP -->
       <nav>
         <a href="#services">Services</a>
         <a href="#funds">Funds</a>
+        <a href="#clients">Clients</a>
         <a href="#calculator">Calculator</a>
-        <a href="#contact">Contact</a>
 
-        <!-- BOOK APPOINTMENT BUTTON -->
         <button class="btn-book" onclick="makeCall()">Book an Appointment</button>
       </nav>
 
@@ -846,6 +979,8 @@
 
   <!-- FUNDS -->
   <section class="section" id="funds">
+    <img class="growth-bg" src="growth.png" alt="growth background">
+
     <div class="section-title">
       <h2>Fund Categories</h2>
       <p>Different mutual fund categories suitable for every investor.</p>
@@ -908,15 +1043,45 @@
     </div>
   </section>
 
+  <!-- CLIENTS -->
+  <section class="amc-section" id="clients">
+    <div class="amc-title">
+      <h2>Our Partners</h2>
+      <p>Trusted AMC companies we work with for better investment planning.</p>
+    </div>
+
+    <div class="amc-slider">
+      <div class="amc-track">
+
+        <div class="amc-card"><img src="amc/axis.png" alt="Axis"></div>
+        <div class="amc-card"><img src="amc/hdfc.png" alt="HDFC"></div>
+        <div class="amc-card"><img src="amc/icici.png" alt="ICICI"></div>
+        <div class="amc-card"><img src="amc/kotak.png" alt="Kotak"></div>
+        <div class="amc-card"><img src="amc/nippon.png" alt="Nippon"></div>
+        <div class="amc-card"><img src="amc/sbi.png" alt="SBI"></div>
+        <div class="amc-card"><img src="amc/uti.png" alt="UTI"></div>
+
+        <div class="amc-card"><img src="amc/axis.png" alt="Axis"></div>
+        <div class="amc-card"><img src="amc/hdfc.png" alt="HDFC"></div>
+        <div class="amc-card"><img src="amc/icici.png" alt="ICICI"></div>
+        <div class="amc-card"><img src="amc/kotak.png" alt="Kotak"></div>
+        <div class="amc-card"><img src="amc/nippon.png" alt="Nippon"></div>
+        <div class="amc-card"><img src="amc/sbi.png" alt="SBI"></div>
+        <div class="amc-card"><img src="amc/uti.png" alt="UTI"></div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- CALCULATOR -->
   <section class="calculator" id="calculator">
     <h2>Investment Calculator</h2>
-    <p>Enter values to calculate your estimated investment growth.</p>
+    <p>Choose SIP or Lumpsum and calculate your estimated investment growth.</p>
 
     <div class="calc-grid">
       <div class="calc-box">
-        <label>Monthly Investment (₹)</label>
-        <input type="number" id="monthly" placeholder="Enter monthly SIP amount" />
+        <label>Investment Amount (₹)</label>
+        <input type="number" id="monthly" placeholder="Enter SIP monthly / Lumpsum amount" />
       </div>
 
       <div class="calc-box">
@@ -931,7 +1096,11 @@
 
       <div class="calc-box">
         <label>Investment Type</label>
-        <input type="text" id="type" placeholder="SIP / Lumpsum" />
+        <select id="type">
+          <option value="">Select Investment Type</option>
+          <option value="sip">SIP</option>
+          <option value="lumpsum">Lumpsum</option>
+        </select>
       </div>
     </div>
 
@@ -946,25 +1115,21 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-wrap">
+ <div class="contact-box">
 
-      <img class="handshake-bg"
-        src="https://cdn-icons-png.flaticon.com/512/929/929426.png"
-        alt="Handshake" />
+  <div class="gold-texture"></div>
 
-      <div class="contact-box">
-        <h2>Contact Us</h2>
-        <p>We will guide you in selecting the right mutual funds for your financial goals.</p>
+  <div class="contact-left">
+    <h2>Contact Us</h2>
+    <p>Call or WhatsApp us for mutual fund guidance & investment planning.</p>
+  </div>
 
-        <input type="text" placeholder="Your Name" />
-        <input type="email" placeholder="Your Email" />
-        <textarea rows="4" placeholder="Write your message..."></textarea>
+  <div class="contact-actions">
+    <button class="contact-btn call-btn" onclick="makeCall()">📞 Call Now</button>
+    <button class="contact-btn whatsapp-btn" onclick="openWhatsApp()">💬 WhatsApp</button>
+  </div>
 
-        <button>Send Message</button>
-      </div>
-    </div>
-  </section>
+</div>
 
   <footer>
     © 2026 Investment Journey | AMFI Registered Mutual Fund Distributor
@@ -983,39 +1148,57 @@
   </div>
 
   <script>
-    /* BOOK APPOINTMENT DIRECT CALL */
     function makeCall(){
-      window.location.href = "tel:+917204914191";
+      window.location.href = "tel:+919739475964";
     }
 
-    /* CALCULATOR */
+    function openWhatsApp(){
+      let message = encodeURIComponent("Hello, I want mutual fund investment guidance.");
+      window.open("https://wa.me/919739475964?text=" + message, "_blank");
+    }
+
     function calculateInvestment() {
-      let monthly = document.getElementById("monthly").value;
+      let amount = document.getElementById("monthly").value;
       let rate = document.getElementById("rate").value;
       let years = document.getElementById("years").value;
+      let type = document.getElementById("type").value;
 
-      if(monthly === "" || rate === "" || years === ""){
+      if(amount === "" || rate === "" || years === "" || type === ""){
         document.getElementById("resultBox").innerHTML =
-          "⚠ Please fill all required values to calculate returns.";
+          "⚠ Please fill all required values and select investment type.";
         return;
       }
 
-      monthly = parseFloat(monthly);
+      amount = parseFloat(amount);
       rate = parseFloat(rate) / 100;
       years = parseFloat(years);
 
       let months = years * 12;
       let monthlyRate = rate / 12;
 
-      let futureValue = monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
-      let invested = monthly * months;
-      let gain = futureValue - invested;
+      if(type === "sip"){
+        let futureValue = amount * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+        let invested = amount * months;
+        let gain = futureValue - invested;
 
-      document.getElementById("resultBox").innerHTML =
-        `<b>Total Invested:</b> ₹${invested.toFixed(0)} <br>
-         <b>Estimated Returns:</b> ₹${gain.toFixed(0)} <br>
-         <b>Total Value:</b> ₹${futureValue.toFixed(0)} <br><br>
-         <span style="color:#9a5b28;font-weight:900;">📈 Smart investing builds wealth over time.</span>`;
+        document.getElementById("resultBox").innerHTML =
+          `<b>Investment Type:</b> SIP <br>
+           <b>Total Invested:</b> ₹${invested.toFixed(0)} <br>
+           <b>Estimated Returns:</b> ₹${gain.toFixed(0)} <br>
+           <b>Total Value:</b> ₹${futureValue.toFixed(0)} <br><br>
+           <span style="color:#9a5b28;font-weight:900;">📈 SIP helps build wealth gradually.</span>`;
+      }
+      else if(type === "lumpsum"){
+        let futureValue = amount * Math.pow(1 + rate, years);
+        let gain = futureValue - amount;
+
+        document.getElementById("resultBox").innerHTML =
+          `<b>Investment Type:</b> Lumpsum <br>
+           <b>Total Invested:</b> ₹${amount.toFixed(0)} <br>
+           <b>Estimated Returns:</b> ₹${gain.toFixed(0)} <br>
+           <b>Total Value:</b> ₹${futureValue.toFixed(0)} <br><br>
+           <span style="color:#9a5b28;font-weight:900;">🚀 Lumpsum grows faster with compounding.</span>`;
+      }
     }
 
     function resetCalculator(){
@@ -1026,7 +1209,6 @@
       document.getElementById("resultBox").innerHTML = "Your results will appear here...";
     }
 
-    /* MODAL DATA */
     const modalData = {
       "Large Cap Funds": {
         desc: "Large Cap Funds invest in India's top companies. These funds are stable and give consistent long-term growth.",
