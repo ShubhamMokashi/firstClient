@@ -4,925 +4,1109 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Krushikesh B. Patil | Mutual Fund Advisor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: Arial, sans-serif;
+    :root {
+      --gold: #c9913a;
+      --gold-light: #e8b96a;
+      --gold-pale: #f5e6c8;
+      --navy: #0d1b3e;
+      --navy-mid: #1a2f5e;
+      --cream: #fdf8f0;
+      --cream-dark: #f5edd8;
+      --ink: #1a1208;
+      --text: #3a2e1e;
+      --muted: #7a6a52;
+      --border: rgba(201,145,58,0.18);
+      --shadow: 0 8px 40px rgba(13,27,62,0.10);
+      --shadow-lg: 0 20px 60px rgba(13,27,62,0.14);
     }
 
-    body{
-      background: linear-gradient(135deg, #fffaf2, #fff3dd, #ffffff);
-      color:#111;
-      overflow-x:hidden;
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
     }
 
-    body::before{
-      content:"";
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
-      opacity:0.35;
-      pointer-events:none;
-      z-index:-1;
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
     }
 
-    /* NAVBAR */
-    header{
-      position:sticky;
-      top:0;
-      z-index:999;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(12px);
-      padding:14px 18px;
-      border-bottom: 1px solid rgba(0,0,0,0.08);
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.55;
+      pointer-events: none;
+      z-index: 9999;
     }
 
-    .nav{
-      max-width:1200px;
-      margin:auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.65s cubic-bezier(.22,1,.36,1), transform 0.65s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+
+    /* ─── HEADER ─── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(253,248,240,0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
     }
 
-    /* BRAND */
-    .brand{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      gap: 24px;
     }
 
-    /* REPLACED Investment Journey with Krushikesh B. Patil */
-    .brand h2{
-      font-size:24px;
-      font-weight:900;
-      color:#111;
-      letter-spacing:0.5px;
-      line-height:1.1;
+    .brand h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.3px;
+      line-height: 1.1;
     }
 
-    .brand span{
-      font-size:13px;
-      color:#8b5a2b;
-      font-weight:900;
+    .brand span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
     }
 
-    nav{
-      display:flex;
-      gap:18px;
-      flex-wrap:wrap;
-      align-items:center;
+    nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
     }
 
-    nav a{
-      text-decoration:none;
-      color:#111;
-      font-size:14px;
-      font-weight:900;
-      opacity:0.75;
-      transition:0.3s;
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
     }
 
-    nav a:hover{
-      opacity:1;
-      color:#b57a3c;
+    nav a:hover {
+      opacity: 1;
+      color: var(--gold);
     }
 
-    .btn-book{
-      background: linear-gradient(90deg, #0d1b3d, #1f2e57);
-      color:white;
-      border:none;
-      padding:12px 22px;
-      border-radius:999px;
-      font-size:14px;
-      font-weight:900;
-      cursor:pointer;
-      box-shadow: 0px 18px 35px rgba(0,0,0,0.18);
-      transition:0.3s;
+    .btn-book {
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      padding: 11px 24px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      letter-spacing: 0.2px;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 4px 18px rgba(13,27,62,0.22);
     }
 
-    .btn-book:hover{
-      transform: translateY(-2px);
-      box-shadow: 0px 25px 45px rgba(0,0,0,0.22);
+    .btn-book:hover {
+      background: var(--navy-mid);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(13,27,62,0.28);
     }
 
-    /* HERO */
-    .hero{
-      max-width:1200px;
-      margin:auto;
-      padding:70px 18px 40px;
-      display:grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap:40px;
-      align-items:center;
+    /* ─── HERO ─── */
+    .hero {
+      max-width: 1200px;
+      margin: auto;
+      padding: 90px 24px 70px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 60px;
+      align-items: center;
     }
 
-    .hero h1{
-      font-size:58px;
-      font-weight:900;
-      line-height:1.05;
-      margin-bottom:15px;
-      color:#111;
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-pale);
+      border: 1px solid rgba(201,145,58,0.3);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 22px;
     }
 
-    .hero h1 span{
-      background: linear-gradient(90deg, #d6a15e, #9a5b28, #111);
+    .hero-label::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse-dot 2s ease infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1.04;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(100deg, var(--gold), #a0611a);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .hero p{
-      font-size:16px;
-      color:#333;
-      line-height:1.7;
-      max-width:620px;
-      font-weight:800;
-      opacity:0.9;
+    .hero-sub {
+      font-size: 15.5px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 520px;
+      font-weight: 400;
+      margin-bottom: 30px;
     }
 
-    .btns{
-      margin-top:25px;
-      display:flex;
-      gap:15px;
-      flex-wrap:wrap;
+    .btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
     }
 
-    .btn-primary{
-      background: linear-gradient(90deg, #c99352, #e0b57d);
-      border:none;
-      padding:14px 24px;
-      border-radius:999px;
-      color:#111;
-      font-weight:900;
-      font-size:15px;
-      cursor:pointer;
-      box-shadow: 0px 12px 26px rgba(180,120,60,0.22);
-      transition:0.3s;
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border: none;
+      padding: 14px 28px;
+      border-radius: 999px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(201,145,58,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.2px;
     }
 
-    .btn-primary:hover{
+    .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0px 16px 32px rgba(180,120,60,0.28);
+      box-shadow: 0 12px 32px rgba(201,145,58,0.42);
     }
 
-    .btn-secondary{
-      background:#fff;
-      border:1px solid rgba(0,0,0,0.18);
-      padding:14px 24px;
-      border-radius:999px;
-      font-weight:900;
-      font-size:15px;
-      cursor:pointer;
-      transition:0.3s;
+    .btn-secondary {
+      background: transparent;
+      border: 1.5px solid rgba(26,18,8,0.18);
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      color: var(--ink);
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
     }
 
-    .btn-secondary:hover{
-      border-color:#b57a3c;
-      color:#b57a3c;
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
       transform: translateY(-2px);
     }
 
-    .address{
-      margin-top:18px;
-      font-size:14px;
-      font-weight:900;
-      color:#111;
+    .address {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 400;
     }
 
-    .address span{
-      color:#9a5b28;
+    .address strong {
+      color: var(--text);
+      font-weight: 600;
     }
 
-    /* HERO CARD */
-    .hero-card{
-      background: rgba(255,255,255,0.78);
-      border:1px solid rgba(0,0,0,0.08);
-      border-radius:22px;
-      padding:22px;
-      box-shadow: 0px 18px 40px rgba(0,0,0,0.08);
-      position:relative;
-      overflow:hidden;
+    /* ─── HERO CARD ─── */
+    .hero-card {
+      background: var(--navy);
+      border-radius: 28px;
+      padding: 36px 30px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
     }
 
-    .hero-card::before{
-      content:"";
-      position:absolute;
-      top:-40px;
-      right:-40px;
-      width:160px;
-      height:160px;
-      background: radial-gradient(circle, rgba(214,161,94,0.4), transparent 70%);
-      border-radius:50%;
+    /* animated gradient orb inside card */
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(201,145,58,0.45), transparent 65%);
+      border-radius: 50%;
+      animation: orbFloat 5s ease-in-out infinite;
     }
 
-    .hero-card h3{
-      font-size:22px;
-      font-weight:900;
-      margin-bottom:10px;
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0,0); }
+      50% { transform: translate(-14px, 18px); }
     }
 
-    .hero-card p{
-      font-size:14px;
-      font-weight:800;
-      color:#444;
-      line-height:1.6;
-      margin-bottom:18px;
+    .hero-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 2;
     }
 
-    .hero-card ul{
-      list-style:none;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+    .hero-card > p {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 2;
     }
 
-    .hero-card ul li{
-      background: rgba(0,0,0,0.05);
-      padding:12px 14px;
-      border-radius:14px;
-      font-size:13px;
-      font-weight:900;
-      color:#222;
+    .hero-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
     }
 
-    /* SECTION */
-    .section{
-      max-width:1200px;
-      margin:auto;
-      padding:60px 18px;
+    .hero-card ul li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.88);
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.09);
+      transition: background 0.2s, border-color 0.2s;
     }
 
-    .section-title{
-      text-align:center;
-      margin-bottom:35px;
+    .hero-card ul li:hover {
+      background: rgba(201,145,58,0.18);
+      border-color: rgba(201,145,58,0.3);
     }
 
-    .section-title h2{
-      font-size:48px;
-      font-weight:900;
-      color:#111;
+    .hero-card ul li::before {
+      content: "✦";
+      color: var(--gold-light);
+      font-size: 10px;
+      flex-shrink: 0;
     }
 
-    .section-title p{
-      margin-top:10px;
-      font-size:15px;
-      font-weight:900;
-      color:#555;
+    /* ─── DIVIDER ─── */
+    .divider {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
-    /* SERVICES */
-    .services-grid{
-      display:grid;
+    .divider hr {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── SECTION ─── */
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 80px 24px;
+    }
+
+    .section-header {
+      margin-bottom: 50px;
+    }
+
+    .section-header .eyebrow {
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.05;
+    }
+
+    .section-header p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-top: 12px;
+      max-width: 520px;
+    }
+
+    /* ─── SERVICES GRID ─── */
+    .services-grid {
+      display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap:22px;
+      gap: 18px;
     }
 
-    .service-card{
-      background: rgba(255,255,255,0.95);
-      border:1px solid rgba(0,0,0,0.10);
-      border-radius:28px;
-      padding:30px;
-      min-height:190px;
-      box-shadow: 0px 16px 40px rgba(0,0,0,0.06);
-      transition:0.35s ease;
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 32px 28px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s, border-color 0.3s;
     }
 
-    .service-card::before{
-      content:"";
-      position:absolute;
-      top:-80px;
-      right:-80px;
-      width:200px;
-      height:200px;
-      background: radial-gradient(circle, rgba(224,181,125,0.40), transparent 70%);
-      border-radius:50%;
+    .service-card::after {
+      content: "";
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(.22,1,.36,1);
     }
 
-    .service-card:hover{
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0px 28px 60px rgba(0,0,0,0.12);
-      border-color: rgba(181,122,60,0.25);
-    }
-
-    .service-card h3{
-      font-size:24px;
-      font-weight:900;
-      margin-bottom:14px;
-      color:#111;
-      position:relative;
-      z-index:2;
-    }
-
-    .service-card p{
-      font-size:14px;
-      font-weight:900;
-      color:#444;
-      line-height:1.8;
-      position:relative;
-      z-index:2;
-    }
-
-    /* FUNDS */
-    #funds{
-      position:relative;
-      overflow:hidden;
-    }
-
-    /* growth.png top right (best) */
-    .growth-bg{
-      position:absolute;
-      top:25px;
-      right:30px;
-      width:330px;
-      opacity:0.18;
-      z-index:0;
-      animation: floatGrowth 4s ease-in-out infinite;
-      filter: brightness(0.75) contrast(1.2);
-    }
-
-    @keyframes floatGrowth{
-      0%{ transform: translateY(0px) translateX(0px); }
-      50%{ transform: translateY(-18px) translateX(-8px); }
-      100%{ transform: translateY(0px) translateX(0px); }
-    }
-
-    #funds .section-title,
-    #funds .fund-grid{
-      position:relative;
-      z-index:2;
-    }
-
-    .fund-grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:22px;
-    }
-
-    .fund-card{
-      background: rgba(255,255,255,0.95);
-      border:1px solid rgba(0,0,0,0.10);
-      border-radius:28px;
-      padding:30px;
-      box-shadow: 0px 16px 40px rgba(0,0,0,0.06);
-      transition:0.35s ease;
-    }
-
-    .fund-card:hover{
+    .service-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0px 28px 60px rgba(0,0,0,0.12);
-      border-color: rgba(181,122,60,0.25);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(201,145,58,0.25);
     }
 
-    .fund-card h3{
-      font-size:24px;
-      font-weight:900;
-      margin-bottom:10px;
+    .service-card:hover::after {
+      transform: scaleX(1);
     }
 
-    .fund-card p{
-      font-size:14px;
-      font-weight:900;
-      color:#444;
-      line-height:1.8;
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--gold-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 20px;
     }
 
-    .fund-action-row{
-      margin-top:18px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
+    .service-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--ink);
     }
 
-    .badge{
-      padding:10px 16px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:900;
-      color:#111;
-      background: linear-gradient(90deg, #e0b57d, #fff0d5);
-      border:1px solid rgba(0,0,0,0.10);
+    .service-card p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.75;
     }
 
-    .btn-view{
-      background: linear-gradient(90deg, #c99352, #e0b57d);
-      color:#111;
-      padding:9px 14px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:900;
-      cursor:pointer;
-      border:none;
-      transition:0.3s;
+    .service-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.25s, transform 0.25s;
     }
 
-    .btn-view:hover{
-      transform: translateY(-2px);
-      box-shadow: 0px 10px 20px rgba(180,120,60,0.22);
+    .service-card:hover .service-arrow {
+      opacity: 1;
+      transform: none;
     }
 
-    /* OUR CLIENTS */
-    .amc-section{
-      max-width:1200px;
-      margin:auto;
-      padding:55px 18px 20px;
-      position:relative;
-      overflow:hidden;
+    /* ─── FUNDS ─── */
+    #funds {
+      background: linear-gradient(160deg, var(--navy) 0%, #0a1630 100%);
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
     }
 
-    .amc-title{
-      text-align:center;
-      margin-bottom:25px;
+    #funds::before {
+      content: "";
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,145,58,0.12), transparent 65%);
     }
 
-    .amc-title h2{
-      font-size:44px;
-      font-weight:900;
-      color:#111;
+    #funds::after {
+      content: "";
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,145,58,0.08), transparent 65%);
     }
 
-    .amc-title p{
-      font-size:14px;
-      font-weight:900;
-      color:#555;
-      margin-top:10px;
+    .funds-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
     }
 
-    .amc-slider{
-      display:flex;
-      gap:22px;
-      overflow:hidden;
-      padding:10px 0;
-      position:relative;
+    .funds-inner .section-header .eyebrow { color: var(--gold-light); }
+    .funds-inner .section-header h2 { color: #fff; }
+    .funds-inner .section-header p { color: rgba(255,255,255,0.55); }
+
+    .fund-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
 
-    .amc-track{
-      display:flex;
-      gap:22px;
-      animation: scrollAmc 18s linear infinite;
+    .fund-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 22px;
+      padding: 30px 26px;
+      transition: transform 0.3s cubic-bezier(.22,1,.36,1), background 0.3s, border-color 0.3s;
+      cursor: pointer;
     }
 
-    .amc-slider:hover .amc-track{
+    .fund-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(201,145,58,0.35);
+    }
+
+    .fund-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .fund-card p {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+    }
+
+    .fund-action-row {
+      margin-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--gold-light);
+      background: rgba(201,145,58,0.15);
+      border: 1px solid rgba(201,145,58,0.25);
+    }
+
+    .btn-view {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.75);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .btn-view:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(201,145,58,0.08);
+    }
+
+    /* ─── PARTNERS SLIDER ─── */
+    .partners-section {
+      padding: 70px 0 60px;
+      background: var(--cream-dark);
+    }
+
+    .partners-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 24px;
+    }
+
+    .partners-inner .section-header { margin-bottom: 36px; }
+
+    .amc-slider {
+      overflow: hidden;
+      padding: 8px 0;
+    }
+
+    .amc-track {
+      display: flex;
+      gap: 18px;
+      width: max-content;
+      animation: scrollAmc 22s linear infinite;
+    }
+
+    .amc-slider:hover .amc-track {
       animation-play-state: paused;
     }
 
-    @keyframes scrollAmc{
-      0%{ transform: translateX(0); }
-      100%{ transform: translateX(-50%); }
+    @keyframes scrollAmc {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    .amc-card{
-      min-width:180px;
-      height:110px;
-      border-radius:20px;
-      background: rgba(255,255,255,0.95);
-      border:1px solid rgba(0,0,0,0.10);
-      box-shadow: 0px 16px 40px rgba(0,0,0,0.06);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition:0.35s ease;
-      cursor:pointer;
+    .amc-card {
+      min-width: 170px;
+      height: 100px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      cursor: pointer;
     }
 
-    .amc-card:hover{
-      transform: translateY(-8px) scale(1.05);
-      box-shadow: 0px 28px 60px rgba(0,0,0,0.12);
-      border-color: rgba(181,122,60,0.30);
+    .amc-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+      border-color: rgba(201,145,58,0.3);
     }
 
-    .amc-card img{
-      width:110px;
-      height:auto;
-      object-fit:contain;
-      transition:0.3s;
+    .amc-card img {
+      width: 100px;
+      height: auto;
+      object-fit: contain;
+      filter: grayscale(30%);
+      transition: filter 0.3s;
     }
 
-    .amc-card:hover img{
-      transform: scale(1.05);
+    .amc-card:hover img {
+      filter: grayscale(0%);
     }
 
-    /* CALCULATOR */
-    .calculator{
-      background: rgba(255,255,255,0.92);
-      border-radius:28px;
-      padding:45px 35px;
-      max-width:1000px;
-      margin:50px auto;
-      border:1px solid rgba(0,0,0,0.08);
-      box-shadow: 0px 25px 55px rgba(0,0,0,0.08);
-      position:relative;
-      overflow:hidden;
+    /* ─── STATS STRIP ─── */
+    .stats-strip {
+      background: var(--navy);
+      padding: 50px 24px;
     }
 
-    .calculator h2{
-      font-size:34px;
-      font-weight:900;
-      margin-bottom:10px;
+    .stats-inner {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      text-align: center;
     }
 
-    .calculator p{
-      font-size:14px;
-      font-weight:900;
-      color:#555;
-      margin-bottom:25px;
+    .stat-item {
+      color: #fff;
     }
 
-    .calc-grid{
-      display:grid;
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    /* ─── CALCULATOR ─── */
+    .calc-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .calculator {
+      background: #fff;
+      border-radius: 28px;
+      padding: 50px 45px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .calculator::before {
+      content: "";
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(201,145,58,0.12), transparent 65%);
+      border-radius: 50%;
+    }
+
+    .calc-header { margin-bottom: 32px; position: relative; z-index: 2; }
+
+    .calc-header .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .calc-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .calc-header p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .calc-grid {
+      display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap:18px;
+      gap: 18px;
+      position: relative;
+      z-index: 2;
     }
 
-    .calc-box label{
-      font-size:13px;
-      font-weight:900;
-      margin-bottom:6px;
-      display:block;
-      color:#333;
-    }
-
-    /* RESTRICT DROPDOWN INSIDE */
-    .calc-box{
-      position:relative;
-      overflow:hidden;
+    .calc-box label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: var(--text);
+      margin-bottom: 8px;
     }
 
     .calc-box input,
-    .calc-box select{
-      width:100%;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid rgba(0,0,0,0.15);
-      background: rgba(255,255,255,0.95);
-      font-size:14px;
-      font-weight:900;
-      outline:none;
-      cursor:pointer;
+    .calc-box select {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(26,18,8,0.12);
+      background: var(--cream);
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+      -moz-appearance: none;
     }
 
-    select{
-      appearance:none;
-      -webkit-appearance:none;
-      -moz-appearance:none;
+    .calc-box input:focus,
+    .calc-box select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,145,58,0.12);
     }
 
-    .calc-actions{
-      margin-top:20px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
+    .calc-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 22px;
+      position: relative;
+      z-index: 2;
     }
 
-    .calc-actions button{
-      padding:12px 18px;
-      border-radius:999px;
-      border:none;
-      font-weight:900;
-      cursor:pointer;
-      font-size:14px;
-      transition:0.3s;
+    .calc-btn {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #fff;
+      border: none;
+      padding: 13px 28px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 20px rgba(201,145,58,0.3);
     }
 
-    .calc-btn{
-      background: linear-gradient(90deg, #c99352, #e0b57d);
-      color:#111;
-    }
-
-    .reset-btn{
-      background:#fff;
-      border:1px solid rgba(0,0,0,0.15);
-    }
-
-    .calc-btn:hover, .reset-btn:hover{
+    .calc-btn:hover {
       transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(201,145,58,0.4);
     }
 
-    .result{
-      margin-top:25px;
-      padding:18px;
-      border-radius:18px;
-      background: rgba(214,161,94,0.12);
-      border:1px solid rgba(0,0,0,0.08);
-      font-size:14px;
-      font-weight:900;
-      line-height:1.8;
-      min-height:80px;
+    .reset-btn {
+      background: transparent;
+      border: 1.5px solid rgba(26,18,8,0.14);
+      color: var(--text);
+      padding: 13px 24px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
     }
 
-    /* CONTACT (REDESIGN MATCHING WEBSITE) */
-
-    .contact-box{
-  max-width:750px;
-  margin:auto;
-  background: rgba(255,255,255,0.90);
-  border-radius:26px;
-  padding:28px 28px;
-  border:1px solid rgba(0,0,0,0.08);
-  box-shadow: 0px 18px 45px rgba(0,0,0,0.08);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  flex-wrap:wrap;
-  position:relative;
-  overflow:hidden;
-}
-
-/* GOLD TEXTURE GLOW */
-.gold-texture{
-  position:absolute;
-  top:-60px;
-  right:-90px;
-  width:260px;
-  height:260px;
-  border-radius:50%;
-  background: radial-gradient(circle,
-    rgba(224,181,125,0.55),
-    rgba(201,147,82,0.25),
-    transparent 70%);
-  opacity:0.9;
-  z-index:0;
-  animation: goldFloat 5s ease-in-out infinite;
-}
-footer{
-  text-align:center;
-  padding:25px 20px;
-  font-size:13px;
-  font-weight:900;
-  background: rgba(255,255,255,0.75);
-  border-top: 1px solid rgba(0,0,0,0.08);
-  color:#111;
-  width:100%;
-}
-
-@keyframes goldFloat{
-  0%{ transform: translateY(0px) translateX(0px); }
-  50%{ transform: translateY(-18px) translateX(-10px); }
-  100%{ transform: translateY(0px) translateX(0px); }
-}
-
-/* KEEP CONTENT ABOVE */
-.contact-left,
-.contact-actions{
-  position:relative;
-  z-index:2;
-}
-
-/* BUTTONS THEME MATCH */
-.contact-btn{
-  padding:12px 20px;
-  border-radius:999px;
-  font-weight:900;
-  border:none;
-  cursor:pointer;
-  font-size:14px;
-  transition:0.3s;
-  min-width:150px;
-  box-shadow: 0px 12px 26px rgba(0,0,0,0.10);
-}
-
-.call-btn{
-  background: linear-gradient(90deg, #0d1b3d, #1f2e57);
-  color:white;
-}
-
-.whatsapp-btn{
-  background: linear-gradient(90deg, #c99352, #e0b57d);
-  color:#111;
-  border:1px solid rgba(0,0,0,0.10);
-}
-
-.contact-btn:hover{
-  transform: translateY(-2px);
-  box-shadow: 0px 18px 35px rgba(0,0,0,0.12);
-}
-.contact-wrap{
-  max-width:1200px;
-  margin:80px auto 70px;   /* bottom gap increase */
-  padding:0 18px;
-}
-
-
-    /* MODAL */
-    .modal-overlay{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(10px);
-      display:none;
-      justify-content:center;
-      align-items:center;
-      padding:20px;
-      z-index:99999;
+    .reset-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
     }
 
-    .modal-box{
-      max-width:650px;
-      width:100%;
-      background: rgba(255,255,255,0.97);
-      border-radius:28px;
-      padding:32px;
-      border: 1px solid rgba(0,0,0,0.10);
-      box-shadow: 0px 25px 60px rgba(0,0,0,0.22);
-      position:relative;
-      animation: popup 0.3s ease;
+    .result {
+      margin-top: 24px;
+      padding: 22px 22px;
+      border-radius: 18px;
+      background: var(--gold-pale);
+      border: 1px solid rgba(201,145,58,0.22);
+      font-size: 14px;
+      line-height: 2;
+      min-height: 80px;
+      color: var(--text);
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s;
     }
 
-    @keyframes popup{
-      from{
-        transform: translateY(20px) scale(0.96);
-        opacity:0;
-      }
-      to{
-        transform: translateY(0px) scale(1);
-        opacity:1;
-      }
+    .result b { color: var(--ink); }
+
+    /* ─── CONTACT ─── */
+    .contact-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
     }
 
-    .modal-box h2{
-      font-size:28px;
-      font-weight:900;
-      margin-bottom:10px;
-      color:#111;
+    .contact-box {
+      background: var(--navy);
+      border-radius: 28px;
+      padding: 55px 55px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
     }
 
-    .modal-box p{
-      font-size:14px;
-      font-weight:900;
-      color:#333;
-      line-height:1.7;
-      margin-bottom:14px;
+    .contact-box::before {
+      content: "";
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,145,58,0.25), transparent 65%);
+      animation: orbFloat 6s ease-in-out infinite;
     }
 
-    .modal-list{
-      margin-top:15px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+    .contact-left { position: relative; z-index: 2; }
+
+    .contact-left h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      line-height: 1.1;
     }
 
-    .modal-item{
-      background: rgba(214,161,94,0.14);
-      padding:12px 14px;
-      border-radius:14px;
-      font-size:13px;
-      font-weight:900;
-      color:#111;
-      border:1px solid rgba(0,0,0,0.08);
+    .contact-left p {
+      font-size: 14.5px;
+      color: rgba(255,255,255,0.55);
+      max-width: 380px;
+      line-height: 1.7;
     }
 
-    .modal-close{
-      position:absolute;
-      top:14px;
-      right:16px;
-      width:40px;
-      height:40px;
-      border-radius:50%;
-      border:none;
-      background: rgba(0,0,0,0.06);
-      font-size:18px;
-      font-weight:900;
-      cursor:pointer;
-      transition:0.3s;
+    .contact-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
     }
 
-    .modal-close:hover{
-      background: rgba(214,161,94,0.25);
+    .contact-btn {
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    /* MOBILE RESPONSIVE */
-    @media(max-width:900px){
+    .call-btn {
+      background: #fff;
+      color: var(--navy);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+    }
 
-      .nav{
-        flex-direction:column;
-        align-items:center;
-        text-align:center;
-        gap:14px;
-      }
+    .call-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.28);
+    }
 
-      .brand{
-        align-items:center;
-        text-align:center;
-      }
+    .whatsapp-btn {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(201,145,58,0.35);
+    }
 
-      nav{
-        width:100%;
-        margin-top:10px;
-        justify-content:center;
-        gap:16px;
-        flex-wrap:wrap;
-      }
+    .whatsapp-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(201,145,58,0.45);
+    }
 
-      .hero{
-        grid-template-columns: 1fr;
-        text-align:center;
-      }
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 13px;
+      letter-spacing: 0.2px;
+    }
 
-      .services-grid{
-        grid-template-columns: 1fr;
-      }
+    footer span { color: var(--gold-light); }
 
-      .fund-grid{
-        grid-template-columns: 1fr;
-      }
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(13,27,62,0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      z-index: 9998;
+    }
 
-      .calc-grid{
-        grid-template-columns: 1fr;
-      }
+    .modal-overlay.open {
+      display: flex;
+    }
 
-      .hero h1{
-        font-size:42px;
-      }
+    .modal-box {
+      max-width: 580px;
+      width: 100%;
+      background: #fff;
+      border-radius: 26px;
+      padding: 38px 36px;
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 80px rgba(13,27,62,0.3);
+      position: relative;
+      animation: modalIn 0.3s cubic-bezier(.22,1,.36,1);
+    }
 
-      .btn-book{
-        width:90%;
-        max-width:340px;
-        text-align:center;
-        margin:auto;
-      }
+    @keyframes modalIn {
+      from { transform: translateY(24px) scale(0.96); opacity: 0; }
+      to { transform: none; opacity: 1; }
+    }
 
-      .growth-bg{
-        width:220px;
-      }
+    .modal-box h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
 
-      .contact-box{
-        flex-direction:column;
-        text-align:center;
-      }
+    .modal-box > p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 22px;
+    }
 
-      .contact-actions{
-        justify-content:center;
-      }
+    .modal-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .modal-item {
+      padding: 13px 16px;
+      border-radius: 14px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--gold-pale);
+      border: 1px solid rgba(201,145,58,0.18);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal-item::before {
+      content: "✦";
+      color: var(--gold);
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px; right: 18px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(26,18,8,0.12);
+      background: transparent;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .modal-close:hover {
+      background: var(--gold-pale);
+      border-color: var(--gold);
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      .nav { flex-wrap: wrap; height: auto; padding: 16px 0; justify-content: center; }
+      .brand { text-align: center; }
+      nav { justify-content: center; gap: 18px; flex-wrap: wrap; }
+      .btn-book { width: 100%; max-width: 300px; text-align: center; }
+
+      .hero { grid-template-columns: 1fr; padding: 60px 24px 50px; gap: 40px; }
+      .hero h1 { font-size: 44px; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .fund-grid { grid-template-columns: 1fr; }
+      .calc-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+
+      .contact-box { flex-direction: column; text-align: center; padding: 40px 30px; }
+      .contact-left p { margin: 0 auto; }
+      .contact-actions { justify-content: center; }
+
+      .calculator { padding: 36px 24px; }
+      .section-header h2 { font-size: 38px; }
+    }
+
+    @media (max-width: 550px) {
+      .hero h1 { font-size: 36px; }
+      .stat-number { font-size: 36px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- NAV -->
+  <!-- ─── HEADER ─── -->
   <header>
     <div class="nav">
-
       <div class="brand">
         <h2>Krushikesh B. Patil</h2>
         <span>AMFI Registered Mutual Fund Distributor</span>
       </div>
-
       <nav>
         <a href="#services">Services</a>
         <a href="#funds">Funds</a>
-        <a href="#clients">Clients</a>
+        <a href="#clients">Partners</a>
         <a href="#calculator">Calculator</a>
-
-        <button class="btn-book" onclick="makeCall()">Book an Appointment</button>
+        <button class="btn-book" onclick="makeCall()">Book Appointment</button>
       </nav>
-
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- ─── HERO ─── -->
   <section class="hero" id="home">
     <div>
-      <h1>Start Your <span>Investment Journey</span> With Us</h1>
-
-      <p>
-        Build wealth with smart investing. We provide expert mutual fund guidance, SIP planning,
-        lumpsum strategy and portfolio management for long-term growth.
-      </p>
-
-      <div class="btns">
-        <button class="btn-primary" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">
-          Calculate Returns
-        </button>
-
-        <button class="btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-          Contact Now
-        </button>
+      <div class="hero-label reveal">AMFI Registered · Belgaum, Karnataka</div>
+      <h1 class="reveal reveal-delay-1">Start Your <em>Investment Journey</em> With Us</h1>
+      <p class="hero-sub reveal reveal-delay-2">Build lasting wealth with expert mutual fund guidance, SIP planning, lumpsum strategy, and personalised portfolio management for long-term growth.</p>
+      <div class="btns reveal reveal-delay-3">
+        <button class="btn-primary" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">Calculate Returns</button>
+        <button class="btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Us</button>
       </div>
-
-      <div class="address">
-        Office Address: <span>Udyambag, Belgaum, Karnataka - 590001</span>
-      </div>
+      <div class="address reveal reveal-delay-4">📍 <strong>Udyambag, Belgaum, Karnataka – 590001</strong></div>
     </div>
 
-    <div class="hero-card">
+    <div class="hero-card reveal reveal-delay-2">
       <h3>Why Choose Us?</h3>
-      <p>We focus on safe, goal-based and long-term investment strategies.</p>
+      <p>Safe, goal-based and long-term investment strategies.</p>
       <ul>
         <li>SIP & Lumpsum Planning</li>
         <li>Fund Selection & Risk Analysis</li>
@@ -932,430 +1116,394 @@ footer{
     </div>
   </section>
 
-  <!-- SERVICES -->
+  <!-- ─── STATS STRIP ─── -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Happy Investors</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-number">7</div>
+        <div class="stat-label">AMC Partners</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-number">₹10Cr+</div>
+        <div class="stat-label">Assets Managed</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SERVICES ─── -->
   <section class="section" id="services">
-    <div class="section-title">
+    <div class="section-header reveal">
+      <div class="eyebrow">What We Offer</div>
       <h2>Our Services</h2>
       <p>Professional investment solutions designed for long-term wealth creation.</p>
     </div>
 
     <div class="services-grid">
-      <div class="service-card" onclick="openModal('Financial Plan')">
+      <div class="service-card reveal reveal-delay-1" onclick="openModal('Financial Plan')">
+        <div class="service-icon">🗺️</div>
         <h3>Financial Plan</h3>
-        <p>Complete roadmap to manage savings, investments and future goals.</p>
+        <p>Complete roadmap to manage savings, investments and future goals effectively.</p>
+        <div class="service-arrow">Learn more →</div>
       </div>
 
-      <div class="service-card" onclick="openModal('Investment Advice')">
+      <div class="service-card reveal reveal-delay-2" onclick="openModal('Investment Advice')">
+        <div class="service-icon">💡</div>
         <h3>Investment Advice</h3>
         <p>Personalized mutual fund guidance based on your goals and risk profile.</p>
+        <div class="service-arrow">Learn more →</div>
       </div>
 
-      <div class="service-card" onclick="openModal('Investment Awareness Programs')">
-        <h3>Investment Awareness Programs</h3>
-        <p>Learn compounding, SIP benefits, market knowledge and smart investing.</p>
+      <div class="service-card reveal reveal-delay-3" onclick="openModal('Investment Awareness Programs')">
+        <div class="service-icon">📚</div>
+        <h3>Investment Awareness</h3>
+        <p>Learn compounding, SIP benefits, market knowledge and smart investing habits.</p>
+        <div class="service-arrow">Learn more →</div>
       </div>
 
-      <div class="service-card" onclick="openModal('Insurance Planning')">
+      <div class="service-card reveal reveal-delay-1" onclick="openModal('Insurance Planning')">
+        <div class="service-icon">🛡️</div>
         <h3>Insurance Planning</h3>
         <p>Protect your family with correct insurance planning aligned to your goals.</p>
+        <div class="service-arrow">Learn more →</div>
       </div>
 
-      <div class="service-card" onclick="openModal('Tax Planning')">
+      <div class="service-card reveal reveal-delay-2" onclick="openModal('Tax Planning')">
+        <div class="service-icon">📊</div>
         <h3>Tax Planning</h3>
         <p>Save taxes legally using ELSS and structured investment strategies.</p>
+        <div class="service-arrow">Learn more →</div>
       </div>
 
-      <div class="service-card" onclick="openModal('Retirement Planning')">
+      <div class="service-card reveal reveal-delay-3" onclick="openModal('Retirement Planning')">
+        <div class="service-icon">🌅</div>
         <h3>Retirement Planning</h3>
-        <p>Build retirement corpus using SIP and long-term wealth strategies.</p>
+        <p>Build a retirement corpus using SIP and long-term wealth strategies.</p>
+        <div class="service-arrow">Learn more →</div>
       </div>
 
-      <div class="service-card" onclick="openModal('Children Education Plan')">
+      <div class="service-card reveal reveal-delay-2" onclick="openModal('Children Education Plan')">
+        <div class="service-icon">🎓</div>
         <h3>Children Education Plan</h3>
-        <p>Secure your child’s education with disciplined long-term investments.</p>
+        <p>Secure your child's education with disciplined long-term investments.</p>
+        <div class="service-arrow">Learn more →</div>
       </div>
     </div>
   </section>
 
-  <!-- FUNDS -->
-  <section class="section" id="funds">
-    <img class="growth-bg" src="growth.png" alt="growth background">
-
-    <div class="section-title">
-      <h2>Fund Categories</h2>
-      <p>Different mutual fund categories suitable for every investor.</p>
-    </div>
-
-    <div class="fund-grid">
-      <div class="fund-card">
-        <h3>Large Cap Funds</h3>
-        <p>Stable investment with consistent long-term growth and low volatility.</p>
-        <div class="fund-action-row">
-          <span class="badge">Low Risk</span>
-          <button class="btn-view" onclick="openModal('Large Cap Funds')">View More →</button>
-        </div>
+  <!-- ─── FUNDS ─── -->
+  <section id="funds">
+    <div class="funds-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">Explore Categories</div>
+        <h2>Fund Categories</h2>
+        <p>Different mutual fund categories suitable for every type of investor.</p>
       </div>
 
-      <div class="fund-card">
-        <h3>Mid Cap Funds</h3>
-        <p>Moderate risk and high growth potential for long-term wealth creation.</p>
-        <div class="fund-action-row">
-          <span class="badge">Medium Risk</span>
-          <button class="btn-view" onclick="openModal('Mid Cap Funds')">View More →</button>
+      <div class="fund-grid">
+        <div class="fund-card reveal reveal-delay-1">
+          <h3>Large Cap Funds</h3>
+          <p>Stable investment with consistent long-term growth and low volatility in India's top companies.</p>
+          <div class="fund-action-row">
+            <span class="badge">Low Risk</span>
+            <button class="btn-view" onclick="openModal('Large Cap Funds')">View More →</button>
+          </div>
         </div>
-      </div>
 
-      <div class="fund-card">
-        <h3>Small Cap Funds</h3>
-        <p>High return potential funds for investors with strong risk capacity.</p>
-        <div class="fund-action-row">
-          <span class="badge">High Risk</span>
-          <button class="btn-view" onclick="openModal('Small Cap Funds')">View More →</button>
+        <div class="fund-card reveal reveal-delay-2">
+          <h3>Mid Cap Funds</h3>
+          <p>Moderate risk and high growth potential for long-term wealth creation in growing companies.</p>
+          <div class="fund-action-row">
+            <span class="badge">Medium Risk</span>
+            <button class="btn-view" onclick="openModal('Mid Cap Funds')">View More →</button>
+          </div>
         </div>
-      </div>
 
-      <div class="fund-card">
-        <h3>Hybrid Funds</h3>
-        <p>Balanced funds with mix of equity & debt for stability and growth.</p>
-        <div class="fund-action-row">
-          <span class="badge">Balanced</span>
-          <button class="btn-view" onclick="openModal('Hybrid Funds')">View More →</button>
+        <div class="fund-card reveal reveal-delay-3">
+          <h3>Small Cap Funds</h3>
+          <p>High return potential funds for investors with strong risk capacity and long horizons.</p>
+          <div class="fund-action-row">
+            <span class="badge">High Risk</span>
+            <button class="btn-view" onclick="openModal('Small Cap Funds')">View More →</button>
+          </div>
         </div>
-      </div>
 
-      <div class="fund-card">
-        <h3>Debt Funds</h3>
-        <p>Safe option focusing on bonds and fixed income instruments.</p>
-        <div class="fund-action-row">
-          <span class="badge">Safe</span>
-          <button class="btn-view" onclick="openModal('Debt Funds')">View More →</button>
+        <div class="fund-card reveal reveal-delay-1">
+          <h3>Hybrid Funds</h3>
+          <p>Balanced funds with a mix of equity and debt for both stability and growth.</p>
+          <div class="fund-action-row">
+            <span class="badge">Balanced</span>
+            <button class="btn-view" onclick="openModal('Hybrid Funds')">View More →</button>
+          </div>
         </div>
-      </div>
 
-      <div class="fund-card">
-        <h3>ELSS Tax Saving Funds</h3>
-        <p>Save tax under 80C while enjoying equity market returns.</p>
-        <div class="fund-action-row">
-          <span class="badge">Tax Saving</span>
-          <button class="btn-view" onclick="openModal('ELSS Tax Saving Funds')">View More →</button>
+        <div class="fund-card reveal reveal-delay-2">
+          <h3>Debt Funds</h3>
+          <p>Safe option focusing on bonds and fixed income instruments with low volatility.</p>
+          <div class="fund-action-row">
+            <span class="badge">Safe</span>
+            <button class="btn-view" onclick="openModal('Debt Funds')">View More →</button>
+          </div>
+        </div>
+
+        <div class="fund-card reveal reveal-delay-3">
+          <h3>ELSS Tax Saving</h3>
+          <p>Save tax under 80C while enjoying equity market returns with a 3-year lock-in.</p>
+          <div class="fund-action-row">
+            <span class="badge">Tax Saving</span>
+            <button class="btn-view" onclick="openModal('ELSS Tax Saving Funds')">View More →</button>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CLIENTS -->
-  <section class="amc-section" id="clients">
-    <div class="amc-title">
-      <h2>Our Partners</h2>
-      <p>Trusted AMC companies we work with for better investment planning.</p>
-    </div>
+  <!-- ─── PARTNERS ─── -->
+  <section class="partners-section" id="clients">
+    <div class="partners-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">Trusted Names</div>
+        <h2>Our Partners</h2>
+        <p>AMC companies we work with for better investment planning and outcomes.</p>
+      </div>
 
-    <div class="amc-slider">
-      <div class="amc-track">
-
-        <div class="amc-card"><img src="amc/axis.png" alt="Axis"></div>
-        <div class="amc-card"><img src="amc/hdfc.png" alt="HDFC"></div>
-        <div class="amc-card"><img src="amc/icici.png" alt="ICICI"></div>
-        <div class="amc-card"><img src="amc/kotak.png" alt="Kotak"></div>
-        <div class="amc-card"><img src="amc/nippon.png" alt="Nippon"></div>
-        <div class="amc-card"><img src="amc/sbi.png" alt="SBI"></div>
-        <div class="amc-card"><img src="amc/uti.png" alt="UTI"></div>
-
-        <div class="amc-card"><img src="amc/axis.png" alt="Axis"></div>
-        <div class="amc-card"><img src="amc/hdfc.png" alt="HDFC"></div>
-        <div class="amc-card"><img src="amc/icici.png" alt="ICICI"></div>
-        <div class="amc-card"><img src="amc/kotak.png" alt="Kotak"></div>
-        <div class="amc-card"><img src="amc/nippon.png" alt="Nippon"></div>
-        <div class="amc-card"><img src="amc/sbi.png" alt="SBI"></div>
-        <div class="amc-card"><img src="amc/uti.png" alt="UTI"></div>
-
+      <div class="amc-slider">
+        <div class="amc-track">
+          <div class="amc-card"><img src="amc/axis.png" alt="Axis"></div>
+          <div class="amc-card"><img src="amc/hdfc.png" alt="HDFC"></div>
+          <div class="amc-card"><img src="amc/icici.png" alt="ICICI"></div>
+          <div class="amc-card"><img src="amc/kotak.png" alt="Kotak"></div>
+          <div class="amc-card"><img src="amc/nippon.png" alt="Nippon"></div>
+          <div class="amc-card"><img src="amc/sbi.png" alt="SBI"></div>
+          <div class="amc-card"><img src="amc/uti.png" alt="UTI"></div>
+          <div class="amc-card"><img src="amc/axis.png" alt="Axis"></div>
+          <div class="amc-card"><img src="amc/hdfc.png" alt="HDFC"></div>
+          <div class="amc-card"><img src="amc/icici.png" alt="ICICI"></div>
+          <div class="amc-card"><img src="amc/kotak.png" alt="Kotak"></div>
+          <div class="amc-card"><img src="amc/nippon.png" alt="Nippon"></div>
+          <div class="amc-card"><img src="amc/sbi.png" alt="SBI"></div>
+          <div class="amc-card"><img src="amc/uti.png" alt="UTI"></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CALCULATOR -->
-  <section class="calculator" id="calculator">
-    <h2>Investment Calculator</h2>
-    <p>Choose SIP or Lumpsum and calculate your estimated investment growth.</p>
-
-    <div class="calc-grid">
-      <div class="calc-box">
-        <label>Investment Amount (₹)</label>
-        <input type="number" id="monthly" placeholder="Enter SIP monthly / Lumpsum amount" />
+  <!-- ─── CALCULATOR ─── -->
+  <div class="calc-section" id="calculator">
+    <div class="calculator reveal">
+      <div class="calc-header">
+        <div class="eyebrow">Plan Ahead</div>
+        <h2>Investment Calculator</h2>
+        <p>Estimate your SIP or Lumpsum investment growth over time.</p>
       </div>
 
-      <div class="calc-box">
-        <label>Expected Return (%)</label>
-        <input type="number" id="rate" placeholder="Enter annual return rate" />
+      <div class="calc-grid">
+        <div class="calc-box">
+          <label>Investment Amount (₹)</label>
+          <input type="number" id="monthly" placeholder="Enter monthly SIP or lumpsum amount" />
+        </div>
+        <div class="calc-box">
+          <label>Expected Annual Return (%)</label>
+          <input type="number" id="rate" placeholder="e.g. 12" />
+        </div>
+        <div class="calc-box">
+          <label>Time Period (Years)</label>
+          <input type="number" id="years" placeholder="e.g. 10" />
+        </div>
+        <div class="calc-box">
+          <label>Investment Type</label>
+          <select id="type">
+            <option value="">Select Investment Type</option>
+            <option value="sip">SIP (Monthly)</option>
+            <option value="lumpsum">Lumpsum (One-time)</option>
+          </select>
+        </div>
       </div>
 
-      <div class="calc-box">
-        <label>Time Period (Years)</label>
-        <input type="number" id="years" placeholder="Enter investment duration" />
+      <div class="calc-actions">
+        <button class="calc-btn" onclick="calculateInvestment()">Calculate Returns</button>
+        <button class="reset-btn" onclick="resetCalculator()">Reset</button>
       </div>
 
-      <div class="calc-box">
-        <label>Investment Type</label>
-        <select id="type">
-          <option value="">Select Investment Type</option>
-          <option value="sip">SIP</option>
-          <option value="lumpsum">Lumpsum</option>
-        </select>
-      </div>
+      <div class="result" id="resultBox">Your results will appear here after calculation…</div>
     </div>
-
-    <div class="calc-actions">
-      <button class="calc-btn" onclick="calculateInvestment()">Calculate</button>
-      <button class="reset-btn" onclick="resetCalculator()">Reset</button>
-    </div>
-
-    <div class="result" id="resultBox">
-      Your results will appear here...
-    </div>
-  </section>
-
-  <!-- CONTACT -->
- <div class="contact-box">
-
-  <div class="gold-texture"></div>
-
-  <div class="contact-left">
-    <h2>Contact Us</h2>
-    <p>Call or WhatsApp us for mutual fund guidance & investment planning.</p>
   </div>
 
-  <div class="contact-actions">
-    <button class="contact-btn call-btn" onclick="makeCall()">📞 Call Now</button>
-    <button class="contact-btn whatsapp-btn" onclick="openWhatsApp()">💬 WhatsApp</button>
+  <!-- ─── CONTACT ─── -->
+  <div class="contact-wrap" id="contact">
+    <div class="contact-box reveal">
+      <div class="contact-left">
+        <h2>Let's Talk Investments</h2>
+        <p>Call or WhatsApp us for personalised mutual fund guidance and investment planning.</p>
+      </div>
+      <div class="contact-actions">
+        <button class="contact-btn call-btn" onclick="makeCall()">📞 Call Now</button>
+        <button class="contact-btn whatsapp-btn" onclick="openWhatsApp()">💬 WhatsApp</button>
+      </div>
+    </div>
   </div>
 
-</div>
-
+  <!-- ─── FOOTER ─── -->
   <footer>
-    © 2026 Investment Journey | AMFI Registered Mutual Fund Distributor
+    © 2026 <span>Krushikesh B. Patil</span> · AMFI Registered Mutual Fund Distributor · All rights reserved.
   </footer>
 
-  <!-- MODAL -->
-  <div class="modal-overlay" id="infoModal">
+  <!-- ─── MODAL ─── -->
+  <div class="modal-overlay" id="infoModal" onclick="handleOverlayClick(event)">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal()">✕</button>
-
-      <h2 id="modalTitle">Title</h2>
-      <p id="modalDesc">Description</p>
-
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
       <div class="modal-list" id="modalDetails"></div>
     </div>
   </div>
 
   <script>
-    function makeCall(){
-      window.location.href = "tel:+919739475964";
+    /* ─── SCROLL REVEAL ─── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ─── CONTACT ─── */
+    function makeCall() { window.location.href = "tel:+919739475964"; }
+    function openWhatsApp() {
+      const msg = encodeURIComponent("Hello, I want mutual fund investment guidance.");
+      window.open("https://wa.me/919739475964?text=" + msg, "_blank");
     }
 
-    function openWhatsApp(){
-      let message = encodeURIComponent("Hello, I want mutual fund investment guidance.");
-      window.open("https://wa.me/919739475964?text=" + message, "_blank");
-    }
-
+    /* ─── CALCULATOR ─── */
     function calculateInvestment() {
-      let amount = document.getElementById("monthly").value;
-      let rate = document.getElementById("rate").value;
-      let years = document.getElementById("years").value;
-      let type = document.getElementById("type").value;
+      const amount = parseFloat(document.getElementById("monthly").value);
+      const rate = parseFloat(document.getElementById("rate").value) / 100;
+      const years = parseFloat(document.getElementById("years").value);
+      const type = document.getElementById("type").value;
 
-      if(amount === "" || rate === "" || years === "" || type === ""){
+      if (!amount || !rate || !years || !type) {
         document.getElementById("resultBox").innerHTML =
-          "⚠ Please fill all required values and select investment type.";
+          "⚠️ Please fill in all fields and select an investment type.";
         return;
       }
 
-      amount = parseFloat(amount);
-      rate = parseFloat(rate) / 100;
-      years = parseFloat(years);
+      const fmt = n => "₹" + Math.round(n).toLocaleString('en-IN');
 
-      let months = years * 12;
-      let monthlyRate = rate / 12;
-
-      if(type === "sip"){
-        let futureValue = amount * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
-        let invested = amount * months;
-        let gain = futureValue - invested;
-
-        document.getElementById("resultBox").innerHTML =
-          `<b>Investment Type:</b> SIP <br>
-           <b>Total Invested:</b> ₹${invested.toFixed(0)} <br>
-           <b>Estimated Returns:</b> ₹${gain.toFixed(0)} <br>
-           <b>Total Value:</b> ₹${futureValue.toFixed(0)} <br><br>
-           <span style="color:#9a5b28;font-weight:900;">📈 SIP helps build wealth gradually.</span>`;
-      }
-      else if(type === "lumpsum"){
-        let futureValue = amount * Math.pow(1 + rate, years);
-        let gain = futureValue - amount;
-
-        document.getElementById("resultBox").innerHTML =
-          `<b>Investment Type:</b> Lumpsum <br>
-           <b>Total Invested:</b> ₹${amount.toFixed(0)} <br>
-           <b>Estimated Returns:</b> ₹${gain.toFixed(0)} <br>
-           <b>Total Value:</b> ₹${futureValue.toFixed(0)} <br><br>
-           <span style="color:#9a5b28;font-weight:900;">🚀 Lumpsum grows faster with compounding.</span>`;
+      if (type === "sip") {
+        const months = years * 12;
+        const mr = rate / 12;
+        const fv = amount * ((Math.pow(1 + mr, months) - 1) / mr) * (1 + mr);
+        const invested = amount * months;
+        const gain = fv - invested;
+        document.getElementById("resultBox").innerHTML = `
+          <b>Type:</b> SIP (Monthly Investment) &nbsp;|&nbsp; <b>Duration:</b> ${years} Years<br>
+          <b>Total Invested:</b> ${fmt(invested)} &nbsp;|&nbsp; <b>Estimated Returns:</b> ${fmt(gain)}<br>
+          <b>Total Portfolio Value:</b> ${fmt(fv)}<br><br>
+          <span style="color:var(--gold);font-weight:600;">📈 SIP helps build wealth steadily through market cycles.</span>`;
+      } else {
+        const fv = amount * Math.pow(1 + rate, years);
+        const gain = fv - amount;
+        document.getElementById("resultBox").innerHTML = `
+          <b>Type:</b> Lumpsum (One-time Investment) &nbsp;|&nbsp; <b>Duration:</b> ${years} Years<br>
+          <b>Amount Invested:</b> ${fmt(amount)} &nbsp;|&nbsp; <b>Estimated Returns:</b> ${fmt(gain)}<br>
+          <b>Total Portfolio Value:</b> ${fmt(fv)}<br><br>
+          <span style="color:var(--gold);font-weight:600;">🚀 Lumpsum benefits fully from long-term compounding.</span>`;
       }
     }
 
-    function resetCalculator(){
-      document.getElementById("monthly").value = "";
-      document.getElementById("rate").value = "";
-      document.getElementById("years").value = "";
-      document.getElementById("type").value = "";
-      document.getElementById("resultBox").innerHTML = "Your results will appear here...";
+    function resetCalculator() {
+      ["monthly","rate","years","type"].forEach(id => document.getElementById(id).value = "");
+      document.getElementById("resultBox").innerHTML = "Your results will appear here after calculation…";
     }
 
+    /* ─── MODAL DATA ─── */
     const modalData = {
       "Large Cap Funds": {
         desc: "Large Cap Funds invest in India's top companies. These funds are stable and give consistent long-term growth.",
-        details: [
-          "Best For: Beginners & conservative investors",
-          "Risk Level: Low to Medium",
-          "Ideal Horizon: 5+ Years",
-          "Why Invest: Stable companies with strong fundamentals",
-          "Suitable Goals: Retirement & long-term stability"
-        ]
+        details: ["Best For: Beginners & conservative investors","Risk Level: Low to Medium","Ideal Horizon: 5+ Years","Why Invest: Stable companies with strong fundamentals","Suitable Goals: Retirement & long-term stability"]
       },
       "Mid Cap Funds": {
-        desc: "Mid Cap Funds invest in growing companies. These funds provide higher growth but with moderate volatility.",
-        details: [
-          "Best For: Investors seeking growth",
-          "Risk Level: Medium",
-          "Ideal Horizon: 5 to 7+ Years",
-          "Why Invest: Higher return potential than large caps",
-          "Suitable Goals: Wealth creation"
-        ]
+        desc: "Mid Cap Funds invest in growing companies with higher growth and moderate volatility.",
+        details: ["Best For: Investors seeking above-average growth","Risk Level: Medium","Ideal Horizon: 5 to 7+ Years","Why Invest: Higher return potential than large caps","Suitable Goals: Wealth creation"]
       },
       "Small Cap Funds": {
         desc: "Small Cap Funds invest in smaller companies with high return potential. Risk is high but returns can be strong.",
-        details: [
-          "Best For: Aggressive investors",
-          "Risk Level: High",
-          "Ideal Horizon: 7 to 10+ Years",
-          "Why Invest: High growth in long term",
-          "Suitable Goals: Maximum wealth creation"
-        ]
+        details: ["Best For: Aggressive investors","Risk Level: High","Ideal Horizon: 7 to 10+ Years","Why Invest: High growth in long term","Suitable Goals: Maximum wealth creation"]
       },
       "Hybrid Funds": {
-        desc: "Hybrid Funds invest in both equity and debt. They balance stability and growth.",
-        details: [
-          "Best For: Balanced investors",
-          "Risk Level: Medium",
-          "Ideal Horizon: 3 to 5+ Years",
-          "Why Invest: Stability + growth combination",
-          "Suitable Goals: Balanced long-term investing"
-        ]
+        desc: "Hybrid Funds invest in both equity and debt, balancing stability and growth.",
+        details: ["Best For: Balanced investors","Risk Level: Medium","Ideal Horizon: 3 to 5+ Years","Why Invest: Stability + growth combination","Suitable Goals: Balanced long-term investing"]
       },
       "Debt Funds": {
-        desc: "Debt Funds invest in fixed income instruments like bonds. They provide stable returns.",
-        details: [
-          "Best For: Safe investors",
-          "Risk Level: Low",
-          "Ideal Horizon: 1 to 3+ Years",
-          "Why Invest: Low volatility stable returns",
-          "Suitable Goals: Short term savings"
-        ]
+        desc: "Debt Funds invest in fixed income instruments like bonds, providing stable returns.",
+        details: ["Best For: Safe investors","Risk Level: Low","Ideal Horizon: 1 to 3+ Years","Why Invest: Low volatility, stable returns","Suitable Goals: Short term savings"]
       },
       "ELSS Tax Saving Funds": {
-        desc: "ELSS Funds save tax under Section 80C and provide equity returns with 3-year lock-in period.",
-        details: [
-          "Best For: Tax saving investors",
-          "Risk Level: Medium to High",
-          "Lock-in Period: 3 Years",
-          "Why Invest: Tax saving + wealth creation",
-          "Suitable Goals: Tax planning"
-        ]
+        desc: "ELSS Funds save tax under Section 80C with equity returns and a 3-year lock-in period.",
+        details: ["Best For: Tax saving investors","Risk Level: Medium to High","Lock-in Period: 3 Years","Why Invest: Tax saving + wealth creation","Suitable Goals: Tax planning"]
       },
       "Financial Plan": {
         desc: "A financial plan helps you create a complete roadmap for savings and investment goals.",
-        details: [
-          "Track expenses & savings",
-          "Plan for home / retirement",
-          "Emergency fund planning",
-          "Goal-based investing strategy"
-        ]
+        details: ["Track expenses & savings","Plan for home / retirement","Emergency fund planning","Goal-based investing strategy"]
       },
       "Investment Advice": {
         desc: "Investment advice helps you select mutual funds based on risk and long-term goals.",
-        details: [
-          "Correct fund selection",
-          "Diversification planning",
-          "Long-term return optimization",
-          "Risk management"
-        ]
+        details: ["Correct fund selection","Diversification planning","Long-term return optimization","Risk management"]
       },
       "Investment Awareness Programs": {
-        desc: "We educate investors about SIP, compounding and financial planning basics.",
-        details: [
-          "SIP knowledge",
-          "Compounding benefits",
-          "Risk & return awareness",
-          "Smart money habits"
-        ]
+        desc: "We educate investors about SIP, compounding, and financial planning basics.",
+        details: ["SIP knowledge","Compounding benefits","Risk & return awareness","Smart money habits"]
       },
       "Insurance Planning": {
         desc: "Insurance planning protects your family and future income in emergencies.",
-        details: [
-          "Life insurance guidance",
-          "Health insurance planning",
-          "Family financial security"
-        ]
+        details: ["Life insurance guidance","Health insurance planning","Family financial security"]
       },
       "Tax Planning": {
         desc: "Tax planning helps you save tax legally while building wealth.",
-        details: [
-          "80C planning",
-          "ELSS guidance",
-          "Smart tax saving investment strategy"
-        ]
+        details: ["80C planning","ELSS guidance","Smart tax saving investment strategy"]
       },
       "Retirement Planning": {
         desc: "Retirement planning helps you build a secure retirement corpus.",
-        details: [
-          "Long-term SIP planning",
-          "Stable retirement portfolio",
-          "Inflation protection"
-        ]
+        details: ["Long-term SIP planning","Stable retirement portfolio","Inflation protection"]
       },
       "Children Education Plan": {
         desc: "A child education plan helps you invest for your child's future education expenses.",
-        details: [
-          "College planning",
-          "Future inflation coverage",
-          "Long-term wealth building"
-        ]
+        details: ["College planning","Future inflation coverage","Long-term wealth building"]
       }
     };
 
-    function openModal(name){
+    function openModal(name) {
       const modal = document.getElementById("infoModal");
-      document.getElementById("modalTitle").innerText = name;
-      document.getElementById("modalDesc").innerText = modalData[name].desc;
-
-      const detailsBox = document.getElementById("modalDetails");
-      detailsBox.innerHTML = "";
-
-      modalData[name].details.forEach(item=>{
-        detailsBox.innerHTML += `<div class="modal-item">${item}</div>`;
-      });
-
-      modal.style.display = "flex";
+      const data = modalData[name];
+      document.getElementById("modalTitle").textContent = name;
+      document.getElementById("modalDesc").textContent = data.desc;
+      const list = document.getElementById("modalDetails");
+      list.innerHTML = data.details.map(d => `<div class="modal-item">${d}</div>`).join("");
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
     }
 
-    function closeModal(){
-      document.getElementById("infoModal").style.display = "none";
+    function closeModal() {
+      document.getElementById("infoModal").classList.remove("open");
+      document.body.style.overflow = "";
     }
 
-    window.addEventListener("click", function(e){
-      const modal = document.getElementById("infoModal");
-      if(e.target === modal){
-        closeModal();
-      }
-    });
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById("infoModal")) closeModal();
+    }
+
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
   </script>
 
 </body>
